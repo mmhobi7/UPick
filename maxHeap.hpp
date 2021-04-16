@@ -10,6 +10,7 @@ public:
     int readHeap();
     void heapPrint();
     int getSize();
+    int extractMax();
 
 private:
     void balance();
