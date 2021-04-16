@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include "tools/json.hpp"
 // credits Muhamed Hobi Stepik 6.1.1
+
+using json = nlohmann::json;
 
 class dataImporter
 {
@@ -13,4 +16,5 @@ public:
 private:
     std::string fileName;
     std::ifstream fileStream;
+    json j;
 };
