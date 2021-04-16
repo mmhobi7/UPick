@@ -1,3 +1,0 @@
-[submodule "tools/yelp-dataset"]
-	path = tools/yelp-dataset
-	url = https://github.com/Yelp/dataset-examples.git
