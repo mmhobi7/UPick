@@ -14,5 +14,5 @@ dataImporter::~dataImporter()
 }
 void dataImporter::read()
 {
-    
+    tmp+=inLine;    
 }

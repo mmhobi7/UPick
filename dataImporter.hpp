@@ -13,4 +13,5 @@ public:
 private:
     std::string fileName;
     std::ifstream fileStream;
+    std::string tmp;
 };
