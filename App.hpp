@@ -11,7 +11,6 @@ class App
     set<string> categorySet;
 public:
     App();
-    
     void SetCategoryList();
     void SetCategorySet();
     vector<string> GetCategoryList();
