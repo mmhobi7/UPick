@@ -1,18 +1,19 @@
-#include "dataImporter.hpp"
+#include "dataImporter.h"
 
-#include <fstream>
 #include <sstream> // std::stringstream
+using std::string;
 
 dataImporter::dataImporter(std::string file)
 {
     fileName = file;
     fileStream.open(fileName);
+    std::cout << "My file is OPEN?? " << fileStream.is_open() << std::endl;
 }
 dataImporter::~dataImporter()
 {
     fileStream.close();
 }
-void dataImporter::read(App& myApp)
+void dataImporter::read(App& myApp, Graph& myGraph)
 {
     // figure out what categories to reading in
     string name, address, category,s_rating, id, temp, s_longitude, s_latitude;
@@ -75,12 +76,14 @@ void dataImporter::read(App& myApp)
                 }
             }
         }
-        
+
         if(!is_restaurant)
            category = "other";
 
         Restaurant* a = new Restaurant(name, rating, address, category, longitude, latitude);
         myApp.AddRestaurant(a);
         is_restaurant = false;
+
+
     }
 }
