@@ -1,12 +1,16 @@
-#include "Graph.hpp"
+#include "Graph.h"
 void Graph::insertEdge(Restaurant* from, Restaurant* to, int weight)
 {
     // add restaurant to mapper
     if(mapper.find(from) == mapper.end()) {
-        mapper[from] = index++;
+        mapper[from] = index;
+        reverseMapper[index] = from;
+        index++;
     }
     if(mapper.find(to) == mapper.end()) {
-        mapper[to] = index++;
+        mapper[to] = index;
+        reverseMapper[index] = to;
+        index++;
     }
     // add vertex to map
     if(v.find(mapper[from]) == v.end()) {
@@ -61,15 +65,10 @@ vector<Restaurant*> Graph::getAdjacent(Restaurant* vertex)
         // find vertex to add
         int key = list[i].first;
         if(v.find(key) != v.end()) {
-            unordered_map<Restaurant*, int>::iterator iter;
-            for(iter = mapper.begin(); iter != mapper.end(); iter++) {
-                if(iter->second == key) {
-                    adj.push_back(iter->first);
-                    break;
-                }
-            }
+            adj.push_back(reverseMapper[key]);
         }
     }
+
     sort(adj.begin(), adj.end());
     return adj;
 }
