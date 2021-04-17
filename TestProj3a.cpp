@@ -1,4 +1,4 @@
-#include "App.h"
+#include "App.hpp"
 #include "dataImporter.hpp"
 
 int main()
