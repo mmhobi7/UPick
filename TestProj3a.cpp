@@ -55,4 +55,80 @@ int main()
             moreRestaurants = false;
     }
     std::cout << "Okay! Enjoy your meal!\n";
+    return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*#include "maxHeap.h"
+#include "Restaurant.h"
+#include "dataImporter.h"
+#include "App.h"
+#include<iostream>
+using namespace std;
+
+enum cuisines {
+    ITALIAN = 1,
+    CHINESE = 2,
+    INDIAN = 3,
+    AMERICAN = 4,
+    MEXICAN = 5,
+    ALL = 6
+};
+
+int main()
+{
+    // UI stuffs
+
+
+
+    // Menu Item Logic
+    // returning top element of max heap of that cuisine
+    // FIXME:: BUILD MAP
+/*
+    map<cuisines, maxHeap> cuisine_map;
+    int userChoice = 1;
+    char cont = 'Y';
+    cin >> userChoice;
+
+
+    maxHeap currHeap = cuisine_map[userChoice];
+    Restaurant currRestaurant = currHeap.front();
+    currHeap.heapRemove();
+
+    while(cont == 'Y') {
+        currRestaurant = currHeap.front();
+        currHeap.heapRemove();
+
+        cout << "We picked \"" << currRestaurant.GetName() << "\"! Would you like to see related restaurants? (Y/N)"
+             << endl;
+        cin >> cont;
+    }
+
+    cout << "Okay! Enjoy your meal!" << endl;
+    return 0;
+
+    // initialize a set to pass in
+    App myApp;
+    Graph myGraph;
+    dataImporter myReader("/Users/wylyyant/CLionProjects/YouPickProject/yelp_business.csv");
+    myReader.read(myApp, myGraph);
+
+    cout << "SIZE OF RESTAURANT LIST : " << myApp.GetRestaurantListSize() << endl;
+} */
