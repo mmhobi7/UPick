@@ -6,7 +6,7 @@
 #include<unordered_map>
 #include<set>
 #include<algorithm>
-#include "Restaurant.hpp"
+#include "Restaurant.h"
 using namespace std;
 
 
@@ -16,7 +16,7 @@ private:
     unordered_map<int, vector<pair<int, int>>> graph;
     set<int> v;
     unordered_map<Restaurant*, int> mapper;
-    unordered_map<Restaurant*, int> mapper;
+    unordered_map<int, Restaurant*> reverseMapper;
     int index;
 
 public:
@@ -26,9 +26,10 @@ public:
     vector<Restaurant*> getAdjacent(Restaurant* vertex);
 
     // bfs
-    
+
 
     // dfs
 
 
 };
+

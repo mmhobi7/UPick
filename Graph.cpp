@@ -22,6 +22,7 @@ void Graph::insertEdge(Restaurant* from, Restaurant* to, int weight)
 
     // add to main graph map
     graph[mapper[from]].push_back(make_pair(mapper[to], weight));
+    graph[mapper[to]].push_back(make_pair(mapper[from], weight));
 }
 
 bool Graph::isEdge(Restaurant* from, Restaurant* to)
