@@ -20,10 +20,12 @@ void dataImporter::read(App& myApp)
     long long longitude, latitude;
     string line;
     bool is_restaurant = false;
+    int count = 0;
 
 
     getline(fileStream, temp); // parse through column names (dont need)
     while(!fileStream.eof()) {
+        count++;
         getline(fileStream, temp, ','); // row number (dont need)
         getline(fileStream, id, ',');
         getline(fileStream, name, ',');
@@ -73,12 +75,12 @@ void dataImporter::read(App& myApp)
                 }
             }
         }
+        
+        if(!is_restaurant)
+           category = "other";
 
-        // create a restaurant if appropriate
-        if(is_restaurant) {
-            Restaurant* a = new Restaurant(name, rating, address, category, longitude, latitude);
-            myApp.AddRestaurant(a);
-            is_restaurant = false;
-        }
+        Restaurant* a = new Restaurant(name, rating, address, category, longitude, latitude);
+        myApp.AddRestaurant(a);
+        is_restaurant = false;
     }
 }
