@@ -1,4 +1,4 @@
-#include "App.h"
+#include "App.hpp"
 
 App::App() {
     SetCategoryList();

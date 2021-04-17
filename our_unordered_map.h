@@ -1,4 +1,6 @@
-#include "Restaurant.h"
+#pragma once
+
+#include "Restaurant.hpp"
 class our_unordered_map
 {
 private:

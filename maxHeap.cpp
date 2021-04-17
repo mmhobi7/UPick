@@ -1,4 +1,5 @@
 #include "maxHeap.hpp"
+#include "Restaurant.hpp"
 
 // credits Muhamed Hobi Stepik 6.1.1
 
@@ -27,6 +28,7 @@ int maxHeap::readHeap()
     //     std::cin >> currElement;
     // }
     // return i;
+    return 0;
 }
 
 void maxHeap::heapRemove()

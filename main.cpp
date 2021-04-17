@@ -1,5 +1,5 @@
 #include "maxHeap.hpp"
-#include "App.h"
+#include "App.hpp"
 
 int main()
 {

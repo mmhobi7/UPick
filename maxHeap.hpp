@@ -1,5 +1,5 @@
 #pragma once
-#include "Restaurant.h"
+#include "Restaurant.hpp"
 // credits Muhamed Hobi Stepik 6.1.1
 
 class maxHeap

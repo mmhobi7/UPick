@@ -1,5 +1,5 @@
 #pragma once
-#include "Restaurant.h"
+#include "Restaurant.hpp"
 
 class App
 {

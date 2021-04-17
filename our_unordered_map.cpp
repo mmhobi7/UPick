@@ -19,12 +19,13 @@ void our_unordered_map::insert(Restaurant val)
         }
         else
         {
-            int *values2 = new int[capacity * 2];
+            Restaurant *values2 = new Restaurant[capacity * 2];
             for (int i = 0; i < capacity; i++)
             {
-                values2[my_hash(values[i].GetAddress())] =
+                values2[my_hash(values[i].GetAddress())] = values[my_hash(val.GetAddress())];
             }
             capacity = capacity * 2;
+            values = values2; //TODO: delete values before reassigning
         }
     }
 }
@@ -47,5 +48,3 @@ int our_unordered_map::size()
 {
     return lsize;
 }
-}
-;
