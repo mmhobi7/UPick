@@ -13,5 +13,5 @@ public:
     vector<string> categoryList;
     void SetCategoryList();
     vector<string> GetCategoryList();
-    void AddRestaurant(Restaurant obj);
+    void AddRestaurant(Restaurant* obj);
 };

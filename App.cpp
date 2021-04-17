@@ -23,3 +23,7 @@ void App::SetCategoryList() {
 vector<string> App::GetCategoryList() {
     return categoryList;
 }
+
+void App::AddRestaurant(Restaurant* obj) {
+    allRestaurants[obj->GetCategory()].push_back(obj);
+}
