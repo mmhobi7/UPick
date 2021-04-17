@@ -20,8 +20,44 @@ void App::SetCategoryList() {
     categoryList.push_back("Vegan");
 }
 
+void App::SetCategorySet() {
+    categorySet.insert("American");
+    categorySet.insert("Asian");
+    categorySet.insert("Bars");
+    categorySet.insert("Breakfast");
+    categorySet.insert("Fast");
+    categorySet.insert("Halal");
+    categorySet.insert("Indian");
+    categorySet.insert("Latin");
+    categorySet.insert("Mediterranean");
+    categorySet.insert("Mexican");
+    categorySet.insert("Pizza");
+    categorySet.insert("Seafood");
+    categorySet.insert("Vegan");
+}
+
 vector<string> App::GetCategoryList() {
     return categoryList;
+}
+
+string App::FindCategory(string s) {
+    if (categorySet.find(s) != categorySet.end()) {
+        return s;
+    }
+    else if (s == "Chinese" || s == "Japanese" || s == "Korean") {
+        return "Asian";
+    }
+    else if (s == "Greek") {
+        return "Mediterranean";
+    }
+    else if (s == "Mexican" || s == "Cuban" || s == "Tex-Mex" || s == "Peruvian" || s == "Colombian") {
+        return "Latin";
+    }
+    else if (s == "Vegetarian") {
+        return "Vegan";
+    }
+    else
+        return "";
 }
 
 void App::AddRestaurant(Restaurant* obj) {

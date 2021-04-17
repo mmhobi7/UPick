@@ -140,14 +140,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="Category.cpp" />
+    <ClCompile Include="dataImporter.cpp" />
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="maxHeap.cpp" />
+    <ClCompile Include="our_unordered_map.cpp" />
     <ClCompile Include="Restaurant.cpp" />
     <ClCompile Include="TestProj3a.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.h" />
-    <ClInclude Include="Category.h" />
-    <ClInclude Include="Restaurant.h" />
+    <ClInclude Include="App.hpp" />
+    <ClInclude Include="dataImporter.hpp" />
+    <ClInclude Include="Graph.hpp" />
+    <ClInclude Include="maxHeap.hpp" />
+    <ClInclude Include="our_unordered_map.h" />
+    <ClInclude Include="Restaurant.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
