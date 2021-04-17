@@ -10,11 +10,12 @@ class Restaurant
     string name;
     string address;
     string category;
+    int zipcode;
     std::pair<long long, long long> coords;
 
 public:
     Restaurant();
-    Restaurant(string _name, double _rating, string addy, string cat, long long longi, long long lat);
+    Restaurant(string _name, double _rating, string addy, string cat, int zip, long long longi, long long lat);
     double rating;
     string GetName();
     double GetRating();

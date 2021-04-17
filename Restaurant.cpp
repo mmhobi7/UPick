@@ -1,4 +1,4 @@
-#include "Restaurant.hpp"
+#include "Restaurant.h"
 
 
 Restaurant::Restaurant() {

@@ -147,11 +147,12 @@
     <ClCompile Include="TestProj3a.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.hpp" />
-    <ClInclude Include="dataImporter.hpp" />
-    <ClInclude Include="Graph.hpp" />
+    <ClInclude Include="App.h" />
+    <ClInclude Include="dataImporter.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="maxHeap.h" />
     <ClInclude Include="our_unordered_map.h" />
-    <ClInclude Include="Restaurant.hpp" />
+    <ClInclude Include="Restaurant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

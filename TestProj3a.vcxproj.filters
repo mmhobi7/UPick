@@ -38,16 +38,19 @@
     <ClInclude Include="our_unordered_map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Restaurant.hpp">
+    <ClInclude Include="dataImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="App.hpp">
+    <ClInclude Include="Graph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dataImporter.hpp">
+    <ClInclude Include="maxHeap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graph.hpp">
+    <ClInclude Include="Restaurant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
