@@ -63,7 +63,7 @@ void maxHeap::heapRemove()
 void maxHeap::heapPrint()
 {
     for (int i = 0; i < theHeapSize; ++i)
-        std::cout << theHeap[i].GetName() << " ";
+        std::cout << theHeap[i].getName() << " ";
 }
 
 int maxHeap::getSize()

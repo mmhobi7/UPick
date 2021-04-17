@@ -1,10 +1,12 @@
 #include "App.h"
 
-App::App() {
-    SetCategoryList();
+App::App()
+{
+    setCategoryList();
 }
 
-void App::SetCategoryList() {
+void App::setCategoryList()
+{
     categoryList.push_back("American");
     categoryList.push_back("Asian");
     categoryList.push_back("Bars");
@@ -20,7 +22,8 @@ void App::SetCategoryList() {
     categoryList.push_back("Vegan");
 }
 
-void App::SetCategorySet() {
+void App::setCategorySet()
+{
     categorySet.insert("American");
     categorySet.insert("Asian");
     categorySet.insert("Bars");
@@ -36,30 +39,38 @@ void App::SetCategorySet() {
     categorySet.insert("Vegan");
 }
 
-vector<string> App::GetCategoryList() {
+vector<string> App::getCategoryList()
+{
     return categoryList;
 }
 
-string App::FindCategory(string s) {
-    if (categorySet.find(s) != categorySet.end()) {
+string App::findCategory(string s)
+{
+    if (categorySet.find(s) != categorySet.end())
+    {
         return s;
     }
-    else if (s == "Chinese" || s == "Japanese" || s == "Korean") {
+    else if (s == "Chinese" || s == "Japanese" || s == "Korean")
+    {
         return "Asian";
     }
-    else if (s == "Greek") {
+    else if (s == "Greek")
+    {
         return "Mediterranean";
     }
-    else if (s == "Mexican" || s == "Cuban" || s == "Tex-Mex" || s == "Peruvian" || s == "Colombian") {
+    else if (s == "Mexican" || s == "Cuban" || s == "Tex-Mex" || s == "Peruvian" || s == "Colombian")
+    {
         return "Latin";
     }
-    else if (s == "Vegetarian") {
+    else if (s == "Vegetarian")
+    {
         return "Vegan";
     }
     else
         return "";
 }
 
-void App::AddRestaurant(Restaurant* obj) {
-    allRestaurants[obj->GetCategory()].push_back(obj);
+void App::addRestaurant(Restaurant *obj)
+{
+    allRestaurants[obj->getCategory()][obj->getZipcode()].push_back(obj);
 }

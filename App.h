@@ -1,19 +1,19 @@
 #pragma once
 #include "Restaurant.h"
+#include <map>
 
 class App
 {
-    unordered_map<string, vector<Restaurant *>> allRestaurants; // make this the unordered_set<std::pair<string,Restaurant>>
-    //unordered_map<category name, vector of restaurants>
-    //set of strings of category
-    unordered_map<string, priority_queue<Restaurant>> RelatedRestaurants;
+    unordered_map<string, std::map<int, vector<Restaurant *>>> allRestaurants; // category, map<zipcode, vecotr<restaurants>>
+    //unordered_map<string, priority_queue<Restaurant>> RelatedRestaurants; // uh idk what this is for
     vector<string> categoryList;
     set<string> categorySet;
+
 public:
     App();
-    void SetCategoryList();
-    void SetCategorySet();
-    vector<string> GetCategoryList();
-    string FindCategory(string s);
-    void AddRestaurant(Restaurant* obj);
+    void setCategoryList();
+    void setCategorySet();
+    vector<string> getCategoryList();
+    string findCategory(string s);
+    void addRestaurant(Restaurant *obj);
 };

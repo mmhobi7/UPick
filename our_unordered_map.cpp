@@ -14,7 +14,7 @@ void our_unordered_map::insert(Restaurant val)
     {
         if (loadsize * capacity > size())
         {
-            values[my_hash(val.GetAddress())] = val;
+            values[my_hash(val.getAddress())] = val;
             lsize++;
         }
         else
@@ -22,7 +22,7 @@ void our_unordered_map::insert(Restaurant val)
             Restaurant *values2 = new Restaurant[capacity * 2];
             for (int i = 0; i < capacity; i++)
             {
-                values2[my_hash(values[i].GetAddress())] = values[my_hash(val.GetAddress())];
+                values2[my_hash(values[i].getAddress())] = values[my_hash(val.getAddress())];
             }
             capacity = capacity * 2;
             values = values2; //TODO: delete values before reassigning
@@ -32,14 +32,14 @@ void our_unordered_map::insert(Restaurant val)
 
 bool our_unordered_map::has(Restaurant val)
 {
-    return (values[my_hash(val.GetAddress())].GetName() == val.GetName());
+    return (values[my_hash(val.getAddress())].getName() == val.getName());
 }
 
 void our_unordered_map::rem(Restaurant val)
 {
     if (has(val))
     {
-        //values[my_hash(val.GetAddress())]=0; // TODO; this if we use it
+        //values[my_hash(val.getAddress())]=0; // TODO; this if we use it
         lsize--;
     }
 }

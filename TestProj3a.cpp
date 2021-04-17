@@ -7,13 +7,16 @@ int main()
     // read in all data
     std::cout << "Welcome to YouPick!\n\n";
     std::cout << "Choose a Preferred Cuisine Style [if any]:\n";
-    for (int i = 1; i <= uPick.GetCategoryList().size(); ++i) {
-        std::cout << i << ": " << uPick.GetCategoryList()[i-1] << endl;
+    for (int i = 1; i <= uPick.getCategoryList().size(); ++i) {
+        std::cout << i << ": " << uPick.getCategoryList()[i-1] << endl;
     }
     std::cout << endl;
     int option = 0;
     cin >> option;
     Restaurant* chosen;
+    dataImporter importer("/home/aaahh/p3/UPick/yelp_business.csv");
+    Graph tmp;
+    importer.read(uPick, tmp);
     if (option == 1) {
 
     }
@@ -116,7 +119,7 @@ int main()
         currRestaurant = currHeap.front();
         currHeap.heapRemove();
 
-        cout << "We picked \"" << currRestaurant.GetName() << "\"! Would you like to see related restaurants? (Y/N)"
+        cout << "We picked \"" << currRestaurant.getName() << "\"! Would you like to see related restaurants? (Y/N)"
              << endl;
         cin >> cont;
     }

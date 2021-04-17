@@ -3,26 +3,30 @@
 #include <sstream> // std::stringstream
 using std::string;
 
-dataImporter::dataImporter(std::string file) {
+dataImporter::dataImporter(std::string file)
+{
     fileName = file;
     fileStream.open(fileName);
     std::cout << "My file is OPEN?? " << fileStream.is_open() << std::endl;
 }
-dataImporter::~dataImporter() {
+dataImporter::~dataImporter()
+{
     fileStream.close();
 }
-void dataImporter::read(App& myApp, Graph& myGraph) {
+void dataImporter::read(App &myApp, Graph &myGraph)
+{
     // figure out what categories to reading in
-    string name, address, category,s_rating, id, temp, s_longitude, s_latitude;
+    string name, address, category, s_rating, id, temp, s_longitude, s_latitude;
     double rating;
     long long longitude, latitude;
-    string zipcode;
+    string zipCode;
     string line;
     bool is_restaurant = false;
     int count = 0;
 
     getline(fileStream, temp); // parse through column names (dont need)
-    while(!fileStream.eof()) {
+    while (!fileStream.eof())
+    {
         count++;
         getline(fileStream, temp, ','); // row number (dont need)
         getline(fileStream, id, ',');
@@ -34,13 +38,13 @@ void dataImporter::read(App& myApp, Graph& myGraph) {
         address += ", " + temp;
         getline(fileStream, temp, ','); // postal code (dont need)
         address += ", " + temp;
-        zipcode = temp;
+        zipCode = temp;
         getline(fileStream, s_latitude, ',');
         getline(fileStream, s_longitude, ',');
         getline(fileStream, s_rating, ','); // num stars
-        getline(fileStream, temp, ','); // num reviews (dont need)
-        getline(fileStream, temp, ','); // is open (dont need)
-        getline(fileStream, line); // list of categories
+        getline(fileStream, temp, ',');     // num reviews (dont need)
+        getline(fileStream, temp, ',');     // is open (dont need)
+        getline(fileStream, line);          // list of categories
 
         latitude = stoll(s_latitude);
         longitude = stoll(s_longitude);
@@ -51,15 +55,23 @@ void dataImporter::read(App& myApp, Graph& myGraph) {
 
         // parse thru categories string to see if any categories are familiar
         // if it category was not found in the name
-        if(!is_restaurant) {
+        if (!is_restaurant)
+        {
             istringstream iss2(line);
             s = "";
-            while (!iss2.eof()) {
+            while (!iss2.eof())
+            {
                 iss2 >> s;
-                category = myApp.FindCategory(s);
-                if (category != "") {
-                    //is_restaurant = true;
-                    myApp.AddRestaurant(new Restaurant(name, rating, address, category, stoi(zipcode), longitude, latitude));
+                category = myApp.findCategory(s);
+                if (category != "")
+                {
+                    //is_restaurant = true
+                    if (zipCode.length() == 5)
+                    {
+                        Restaurant *tmp = new Restaurant(name, rating, address, category, stoi(zipCode), longitude, latitude);
+                        myApp.addRestaurant(tmp);
+                        tmp->print();
+                    }
                     break;
                 }
             }
@@ -68,7 +80,7 @@ void dataImporter::read(App& myApp, Graph& myGraph) {
         if(!is_restaurant)
            category = "other";
 
-        myApp.AddRestaurant(new Restaurant(name, rating, address, category, longitude, latitude));*/
+        myApp.addRestaurant(new Restaurant(name, rating, address, category, longitude, latitude));*/
         is_restaurant = false;
     }
 }
