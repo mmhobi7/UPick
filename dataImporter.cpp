@@ -14,5 +14,13 @@ dataImporter::~dataImporter()
 }
 void dataImporter::read()
 {
-    tmp+=inLine;    
+    string line;
+    while(!fileStream.eof()) {
+        
+        getline(fileStream, line);
+        line.substr(line.find(","), )
+        
+        // make a restaurant
+        // add it
+    }
 }
