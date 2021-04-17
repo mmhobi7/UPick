@@ -16,6 +16,7 @@ private:
     unordered_map<int, vector<pair<int, int>>> graph;
     set<int> v;
     unordered_map<Restaurant*, int> mapper;
+    unordered_map<Restaurant*, int> mapper;
     int index;
 
 public:
