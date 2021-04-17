@@ -5,14 +5,17 @@
 #include <set>
 using namespace std;
 
-class Restaurant {
+class Restaurant
+{
     string name;
-    double rating;
     string address;
     string category;
     std::pair<long long, long long> coords;
+
 public:
+    double rating;
     Restaurant(string _name, double _rating, string addy, string cat, long long longi, long long lat);
+    Restaurant();
     string GetName();
     double GetRating();
     string GetAddress();
@@ -20,4 +23,3 @@ public:
     void SetCategory(string cat);
     std::pair<long long, long long> GetCoords();
 };
-

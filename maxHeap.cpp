@@ -18,40 +18,39 @@ maxHeap::~maxHeap()
 
 int maxHeap::readHeap()
 {
-    int currElement = 0;
-    int i = 0;
-    std::cin >> currElement;
-    while (currElement != -1)
-    {
-        theheap[i++] = currElement;
-        std::cin >> currElement;
-    }
-    return i;
+    // Restaurant currElement = 0;
+    // int i = 0;
+    // std::cin >> currElement;
+    // while (currElement != -1)
+    // {
+    //     theHeap[i++] = currElement;
+    //     std::cin >> currElement;
+    // }
+    // return i;
 }
 
-
-void heapRemove(int* theheap, int& size)
+void maxHeap::heapRemove()
 {
-    theheap[0] = theheap[--size];
+    theHeap[0] = theHeap[--theHeapSize];
     int i = 0;
-    int leftChild = 2*i + 1;
-    int rightChild = 2*i + 2;
+    int leftChild = 2 * i + 1;
+    int rightChild = 2 * i + 2;
     int minChild = 0;
-    if (theheap[leftChild]->rating > theheap[rightChild]->rating)
+    if (theHeap[leftChild].rating > theHeap[rightChild].rating)
         minChild = rightChild;
     else
         minChild = leftChild;
-    while (theheap[i]->rating > theheap[minChild]->rating)
+    while (theHeap[i].rating > theHeap[minChild].rating)
     {
-        Restaurant* tempVal = theheap[i];
-        theheap[i] = theheap[minChild];
-        theheap[minChild] = tempVal;
+        Restaurant tempVal = theHeap[i];
+        theHeap[i] = theHeap[minChild];
+        theHeap[minChild] = tempVal;
         i = minChild;
-        leftChild = 2*i + 1;
-        if (leftChild > size - 1)
+        leftChild = 2 * i + 1;
+        if (leftChild > theHeapSize - 1)
             break;
-        rightChild = 2*i + 2;
-        if (theheap[leftChild]->rating > theheap[rightChild]->rating)
+        rightChild = 2 * i + 2;
+        if (theHeap[leftChild].rating > theHeap[rightChild].rating)
             minChild = rightChild;
         else
             minChild = leftChild;
@@ -59,10 +58,10 @@ void heapRemove(int* theheap, int& size)
     return;
 }
 
-void heapPrint(int* theheap, int size)
+void maxHeap::heapPrint()
 {
-    for (int i = 0; i < size; ++i)
-        std::cout << theheap[i] << " ";
+    for (int i = 0; i < theHeapSize; ++i)
+        std::cout << theHeap[i].GetName() << " ";
 }
 
 int maxHeap::getSize()
@@ -70,9 +69,9 @@ int maxHeap::getSize()
     return theHeapSize;
 }
 
-int maxHeap::extractMax(int arr[], int size)
+Restaurant maxHeap::extractMax()
 {
-    int rootVal = arr[0];
+    Restaurant rootVal = theHeap[0];
     heapRemove();
     return rootVal;
 }

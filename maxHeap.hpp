@@ -11,10 +11,10 @@ public:
     int readHeap();
     void heapPrint();
     int getSize();
-    Restaurant* extractMax();
+    Restaurant extractMax();
 
 private:
     void balance();
-    int *theHeap;
+    Restaurant *theHeap;
     int theHeapSize;
 };
