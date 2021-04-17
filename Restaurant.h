@@ -7,6 +7,7 @@ using namespace std;
 
 class Restaurant
 {
+    string id;
     string name;
     string address;
     string category;
