@@ -20,6 +20,22 @@ void App::SetCategoryList() {
     categoryList.push_back("Vegan");
 }
 
+void App::SetCategorySet() {
+    categorySet.insert("American");
+    categorySet.insert("Asian");
+    categorySet.insert("Bars");
+    categorySet.insert("Breakfast");
+    categorySet.insert("Fast");
+    categorySet.insert("Halal");
+    categorySet.insert("Indian");
+    categorySet.insert("Latin");
+    categorySet.insert("Mediterranean");
+    categorySet.insert("Mexican");
+    categorySet.insert("Pizza");
+    categorySet.insert("Seafood");
+    categorySet.insert("Vegan");
+}
+
 vector<string> App::GetCategoryList() {
     return categoryList;
 }

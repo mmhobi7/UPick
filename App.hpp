@@ -7,11 +7,14 @@ class App
     //unordered_map<category name, vector of restaurants>
     //set of strings of category
     unordered_map<string, priority_queue<Restaurant>> RelatedRestaurants;
-
+    vector<string> categoryList;
+    set<string> categorySet;
 public:
     App();
-    vector<string> categoryList;
+    
     void SetCategoryList();
+    void SetCategorySet();
     vector<string> GetCategoryList();
+    string FindCategory(string s);
     void AddRestaurant(Restaurant* obj);
 };
