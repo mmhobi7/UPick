@@ -12,6 +12,7 @@ class Restaurant {
     string category;
     std::pair<long long, long long> coords;
 public:
+    Restaurant();
     Restaurant(string _name, double _rating, string addy, string cat, long long longi, long long lat);
     string GetName();
     double GetRating();

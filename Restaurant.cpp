@@ -1,5 +1,14 @@
 #include "Restaurant.h"
 
+
+Restaurant::Restaurant() {
+    name = "_name";
+    rating = 0;
+    address = "addy";
+    category = "cat";
+    coords.first = 0;
+    coords.second = 0;
+}
 Restaurant::Restaurant(string _name, double _rating, string addy, string cat, long long longi, long long lat) {
     name = _name;
     rating = _rating;

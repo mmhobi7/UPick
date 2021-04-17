@@ -1,7 +1,7 @@
 #include "App.h"
 #include "dataImporter.h"
 
-int main()
+int notmain()
 {
     App uPick;
     // read in all data

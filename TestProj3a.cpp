@@ -1,5 +1,5 @@
-#include "App.hpp"
-#include "dataImporter.hpp"
+#include "App.h"
+#include "dataImporter.h"
 
 int main()
 {
