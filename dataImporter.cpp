@@ -3,26 +3,23 @@
 #include <sstream> // std::stringstream
 using std::string;
 
-dataImporter::dataImporter(std::string file)
-{
+dataImporter::dataImporter(std::string file) {
     fileName = file;
     fileStream.open(fileName);
     std::cout << "My file is OPEN?? " << fileStream.is_open() << std::endl;
 }
-dataImporter::~dataImporter()
-{
+dataImporter::~dataImporter() {
     fileStream.close();
 }
-void dataImporter::read(App& myApp, Graph& myGraph)
-{
+void dataImporter::read(App& myApp, Graph& myGraph) {
     // figure out what categories to reading in
     string name, address, category,s_rating, id, temp, s_longitude, s_latitude;
     double rating;
     long long longitude, latitude;
+    string zipcode;
     string line;
     bool is_restaurant = false;
     int count = 0;
-
 
     getline(fileStream, temp); // parse through column names (dont need)
     while(!fileStream.eof()) {
@@ -32,8 +29,12 @@ void dataImporter::read(App& myApp, Graph& myGraph)
         getline(fileStream, name, ',');
         getline(fileStream, address, ',');
         getline(fileStream, temp, ','); // city (dont need)
+        address += ", " + temp;
         getline(fileStream, temp, ','); // state (dont need)
+        address += ", " + temp;
         getline(fileStream, temp, ','); // postal code (dont need)
+        address += ", " + temp;
+        zipcode = temp;
         getline(fileStream, s_latitude, ',');
         getline(fileStream, s_longitude, ',');
         getline(fileStream, s_rating, ','); // num stars
@@ -47,20 +48,6 @@ void dataImporter::read(App& myApp, Graph& myGraph)
         // parse thru name to see if it is a restaurant
         istringstream iss1(name);
         string s;
-        set<string> catList;
-        vector<string> v_catList = myApp.GetCategoryList();
-        for(int i = 0; i < v_catList.size(); i++) {
-            catList.insert(v_catList[i]);
-        }
-
-        while(!iss1.eof()) {
-            iss1 >> s;
-            if(catList.find(s) != catList.end()) {
-                is_restaurant = true;
-                category = s;
-                break;
-            }
-        }
 
         // parse thru categories string to see if any categories are familiar
         // if it category was not found in the name
@@ -69,21 +56,19 @@ void dataImporter::read(App& myApp, Graph& myGraph)
             s = "";
             while (!iss2.eof()) {
                 iss2 >> s;
-                if (catList.find(s) != catList.end()) {
-                    is_restaurant = true;
-                    category = s;
+                category = myApp.FindCategory(s);
+                if (category != "") {
+                    //is_restaurant = true;
+                    myApp.AddRestaurant(new Restaurant(name, rating, address, category, stoi(zipcode), longitude, latitude));
                     break;
                 }
             }
         }
-
+        /*
         if(!is_restaurant)
            category = "other";
 
-        Restaurant* a = new Restaurant(name, rating, address, category, longitude, latitude);
-        myApp.AddRestaurant(a);
+        myApp.AddRestaurant(new Restaurant(name, rating, address, category, longitude, latitude));*/
         is_restaurant = false;
-
-
     }
 }

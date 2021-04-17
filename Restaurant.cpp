@@ -1,4 +1,4 @@
-#include "Restaurant.h"
+#include "Restaurant.hpp"
 
 
 Restaurant::Restaurant() {
@@ -9,11 +9,12 @@ Restaurant::Restaurant() {
     coords.first = 0;
     coords.second = 0;
 }
-Restaurant::Restaurant(string _name, double _rating, string addy, string cat, long long longi, long long lat) {
+Restaurant::Restaurant(string _name, double _rating, string addy, string cat, int zip, long long longi, long long lat) {
     name = _name;
     rating = _rating;
     address = addy;
     category = cat;
+    zipcode = zip;
     coords.first = longi;
     coords.second = lat;
 }
