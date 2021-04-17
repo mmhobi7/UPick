@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include "App.h"
 // credits Muhamed Hobi Stepik 6.1.1
 
 class dataImporter
@@ -8,7 +9,7 @@ class dataImporter
 public:
     dataImporter(std::string);
     ~dataImporter();
-    void read();
+    void read(App& myApp);
 
 private:
     std::string fileName;
