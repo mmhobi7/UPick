@@ -1,5 +1,5 @@
 #pragma once
-#include "Restaurant.h"
+#include "heapRestaurant.h"
 // credits Muhamed Hobi Stepik 6.1.1
 
 class maxHeap
@@ -7,14 +7,12 @@ class maxHeap
 public:
     maxHeap(int);
     ~maxHeap();
-    void heapRemove();
-    int readHeap();
     void heapPrint();
     int getSize();
-    Restaurant extractMax();
+    Restaurant* extractMax();
 
 private:
-    void balance();
-    Restaurant *theHeap;
+    heapRestaurant* heapifyDown(int);
+    heapRestaurant *theHeap;
     int theHeapSize;
 };
