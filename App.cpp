@@ -99,7 +99,9 @@ int App::findZip(int zip, string cat)
 
 int App::getCategorySize(int category)
 {
-    return allRestaurants[categoryList[category - 1]].size();
+    auto tmp = allRestaurants.begin();
+    advance(tmp, category-1);
+    return allRestaurants[tmp->first].size();
 }
 
 int App::getListSize()
