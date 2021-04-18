@@ -145,3 +145,21 @@ Graph& App::getLocalGraph(string cat, int zipcode, Restaurant* source) {
         }
     }
 }
+
+maxHeap& App::getLocalHeap(string cat, int zipcode, Restaurant* source) {
+    maxHeap myHeap;
+    auto it = allRestaurants[cat].begin();
+    for(it = allRestaurants[cat].begin(); it != allRestaurants[cat].end(); it++) {
+        if(it->first == zipcode) {
+            break;
+        }
+    }
+    
+    vector<Restaurant*> restInZip = allRestaurants[cat][zipcode];
+    for(int i = 0; i < restInZip.size(); i++) {
+        for(int j = 1; j < restInZip.size(); j++) {
+            if(!myHeap.isEdge(restInZip[i], restInZip[j]))
+                myHeap.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
+        }
+    }
+}

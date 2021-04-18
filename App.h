@@ -1,5 +1,7 @@
 #pragma once
 #include "Restaurant.h"
+#include "Graph.h"
+#include "maxHeap.h"
 #include <map>
 
 class App
@@ -24,4 +26,5 @@ public:
     int getListZipcodeSize(string);
     unordered_map<string, std::map<int, vector<Restaurant *>>> getList();
     Graph& getLocalGraph(string cat, int zipcode, Restaurant* source);
+    maxHeap& getLocalHeap(string cat, int zipcode, Restaurant* source);
 };
