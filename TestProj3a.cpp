@@ -18,44 +18,50 @@ int main()
     int option = 0;
     cin >> option;
     char choice;
-    Restaurant* chosen;
+    Restaurant *chosen;
     dataImporter importer("yelp_business.csv");
     Graph tmp;
     importer.read(uPick, tmp);
     // if all, generate random cuisine
-        std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
-        cin >> choice;
-        int zipcode = 0;
-        int size = 0;
-        if (option == 15) {
-            option = rand() % 15;
-        }
-        if (choice == 'Y' || choice == 'y') {
-            cin >> zipcode;
-            zipcode = uPick.findZip(zipcode, uPick.getCategoryList()[option - 1]);
-        }
-        else {
-            size = uPick.getCategorySize(option);
-            int zipcode = rand() % size;
-        }
-        size = uPick.getZipcodeSize(option, zipcode);
-        int randRest = rand() % size;
-        chosen = uPick.getRestaurant(option, zipcode, randRest);
-        
+    std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
+    cin >> choice;
+    int zipcode = 0;
+    int size = 0;
+    if (option == 15)
+    {
+        option = rand() % 15;
+    }
+    if (choice == 'Y' || choice == 'y')
+    {
+        cin >> zipcode;
+        zipcode = uPick.findZip(zipcode, uPick.getCategoryList()[option - 1]);
+    }
+    else
+    {
+        size = uPick.getCategorySize(option);
+        int zipcode = rand() % size;
+    }
+    size = uPick.getZipcodeSize(option, zipcode);
+    int randRest = rand() % size;
+    chosen = uPick.getRestaurant(option, zipcode, randRest);
+
     // generate heap and graph from this restaurant
-    
+
     std::cout << "\nGreat Choice! Picking a restaurant now...\n\n";
-    std::cout << "We picked" << chosen->getName() << endl << "Would you like to see related restaurants? (Y/N)\n\n";
+    std::cout << "We picked" << chosen->getName() << endl
+              << "Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
-    
+
     //<Restaurant*> related = temp.bfs(chosen);
-    
-    while (moreRestaurants) {
-            cin >> choice;
-            if (choice == 'Y') {
-                std::cout << "Would you like to see more?" << endl;
-                //print out 5 more choices while maxHeap is not empty
-                /*if(related.size() > 5) {
+
+    while (moreRestaurants)
+    {
+        cin >> choice;
+        if (choice == 'Y')
+        {
+            std::cout << "Would you like to see more?" << endl;
+            //print out 5 more choices while maxHeap is not empty
+            /*if(related.size() > 5) {
                     size = 5;
                 } else {
                     size = related.size();
@@ -64,10 +70,10 @@ int main()
                     related.front()->print();
                     related.pop();
                 }*/
-            }
-            else
-                moreRestaurants = false;
         }
+        else
+            moreRestaurants = false;
+    }
     std::cout << "Okay! Enjoy your meal!\n";
     return 0;
 }

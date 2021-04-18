@@ -55,6 +55,7 @@ std::pair<long long, long long> Restaurant::getCoords()
     return coords;
 }
 
-void Restaurant::print(){
+void Restaurant::print()
+{
     cout << "Name: " << getName() << " Rating: " << getRating() << " Category: " << getCategory() << " ZipCode: " << getZipcode() << endl;
 }
