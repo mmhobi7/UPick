@@ -59,7 +59,7 @@ int main()
 
         graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
 
-        queue<Restaurant*> related = myGraph.bfs(chosen);
+        queue<Restaurant*> related = graph.bfs(chosen);
         while (moreRestaurants)
         {
             cin >> choice;
@@ -78,7 +78,6 @@ int main()
                     }
                 std::cout << "Would you like to see more?" << endl;
                     }
-            }
             else
                 moreRestaurants = false;
         }
