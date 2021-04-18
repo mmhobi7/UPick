@@ -23,8 +23,10 @@ public:
     bool isEdge(Restaurant *from, Restaurant *to);
     int getWeight(Restaurant *from, Restaurant *to);
     vector<Restaurant *> getAdjacent(Restaurant *vertex);
+    long long distance(Restaurant* a, Restaurant* b);
 
     // bfs
+    queue<Restaurant*> bfs(Restaurant* src);
 
-    // dfs
+
 };
