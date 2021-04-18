@@ -7,7 +7,6 @@ dataImporter::dataImporter(std::string file)
 {
     fileName = file;
     fileStream.open(fileName);
-    std::cout << "My file is OPEN?? " << fileStream.is_open() << std::endl;
 }
 dataImporter::~dataImporter()
 {

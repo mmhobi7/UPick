@@ -16,6 +16,7 @@ public:
     vector<string> getCategoryList();
     string findCategory(string s);
     void addRestaurant(Restaurant *obj);
+    int findZip(int zip, string cat);
     int getCategorySize(int category);
     int getZipcodeSize(int category, int zipcode);
     Restaurant *getRestaurant(int category, int zipcode, int index);
