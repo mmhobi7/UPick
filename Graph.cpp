@@ -1,4 +1,5 @@
 #include "Graph.h"
+#include <math.h>
 void Graph::insertEdge(Restaurant *from, Restaurant *to, int weight)
 {
     // add restaurant to mapper

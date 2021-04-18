@@ -3,27 +3,27 @@
 
 App::App()
 {
-    setCategoryList();
+    // setCategoryList();
     setCategorySet();
 }
 
-void App::setCategoryList()
-{
-    categoryList.push_back("American");
-    categoryList.push_back("Asian Fusion");
-    categoryList.push_back("Bars");
-    categoryList.push_back("Breakfast");
-    categoryList.push_back("Coffee & Tea");
-    categoryList.push_back("Fast Food");
-    categoryList.push_back("Halal");
-    categoryList.push_back("Indian");
-    categoryList.push_back("Latin");
-    categoryList.push_back("Mediterranean");
-    categoryList.push_back("Mexican");
-    categoryList.push_back("Pizza");
-    categoryList.push_back("Seafood");
-    categoryList.push_back("Vegan");
-}
+// void App::setCategoryList()
+// {
+//     categoryList.push_back("American");
+//     categoryList.push_back("Asian Fusion");
+//     categoryList.push_back("Bars");
+//     categoryList.push_back("Breakfast");
+//     categoryList.push_back("Coffee & Tea");
+//     categoryList.push_back("Fast Food");
+//     categoryList.push_back("Halal");
+//     categoryList.push_back("Indian");
+//     categoryList.push_back("Latin");
+//     categoryList.push_back("Mediterranean");
+//     categoryList.push_back("Mexican");
+//     categoryList.push_back("Pizza");
+//     categoryList.push_back("Seafood");
+//     categoryList.push_back("Vegan");
+// }
 
 void App::setCategorySet()
 {
@@ -43,9 +43,9 @@ void App::setCategorySet()
     categorySet.insert("Vegan");
 }
 
-vector<string> App::getCategoryList()
+set<string> App::getCategorySet()
 {
-    return categoryList;
+    return categorySet;
 }
 
 string App::findCategory(string s)
@@ -99,9 +99,7 @@ int App::findZip(int zip, string cat)
 
 int App::getCategorySize(int category)
 {
-    auto tmp = allRestaurants.begin();
-    advance(tmp, category-1);
-    return allRestaurants[tmp->first].size();
+    return allRestaurants[(next(allRestaurants.begin(), category))->first].size();
 }
 
 int App::getListSize()
@@ -114,14 +112,15 @@ int App::getListZipcodeSize(string key)
     return allRestaurants[key].size();
 }
 
-int App::getZipcodeSize(int category, int zipcode) {
-    zipcode = findZip(zipcode, getCategoryList()[category - 1]);
-    return allRestaurants[categoryList[category - 1]][zipcode].size();
+int App::getZipcodeSize(int category, int zipcode)
+{
+    zipcode = findZip(zipcode, (next(allRestaurants.begin(), category - 1))->first);
+    return allRestaurants[(next(allRestaurants.begin(), category - 1))->first][zipcode].size();
 }
 
 Restaurant *App::getRestaurant(int category, int zipcode, int index)
 {
-    return allRestaurants[categoryList[category - 1]][zipcode][index];
+    return allRestaurants[(next(allRestaurants.begin(), category - 1))->first][zipcode][index];
 }
 
 unordered_map<string, std::map<int, vector<Restaurant *>>> App::getList()
@@ -129,39 +128,42 @@ unordered_map<string, std::map<int, vector<Restaurant *>>> App::getList()
     return allRestaurants;
 }
 
-Graph& App::getLocalGraph(string cat, int zipcode, Restaurant* source) {
+Graph &App::getLocalGraph(string cat, int zipcode, Restaurant *source)
+{
     Graph myGraph;
     auto it = allRestaurants[cat].begin();
-    for(it = allRestaurants[cat].begin(); it != allRestaurants[cat].end(); it++) {
-        if(it->first == zipcode) {
+    for (it = allRestaurants[cat].begin(); it != allRestaurants[cat].end(); it++)
+    {
+        if (it->first == zipcode)
+        {
             break;
         }
     }
-    
-    
-    vector<Restaurant*> restInZip = allRestaurants[cat][zipcode];
-    for(int i = 0; i < restInZip.size(); i++) {
-        for(int j = 1; j < restInZip.size(); j++) {
-            if(!myGraph.isEdge(restInZip[i], restInZip[j]))
+
+    vector<Restaurant *> restInZip = allRestaurants[cat][zipcode];
+    for (int i = 0; i < restInZip.size(); i++)
+    {
+        for (int j = 1; j < restInZip.size(); j++)
+        {
+            if (!myGraph.isEdge(restInZip[i], restInZip[j]))
                 myGraph.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
         }
     }
 }
 
-maxHeap& App::getLocalHeap(string cat, int zipcode, Restaurant* source) {
-    maxHeap myHeap;
-    auto it = allRestaurants[cat].begin();
-    for(it = allRestaurants[cat].begin(); it != allRestaurants[cat].end(); it++) {
-        if(it->first == zipcode) {
-            break;
-        }
-    }
-    
-    vector<Restaurant*> restInZip = allRestaurants[cat][zipcode];
-    for(int i = 0; i < restInZip.size(); i++) {
-        for(int j = 1; j < restInZip.size(); j++) {
-            if(!myHeap.isEdge(restInZip[i], restInZip[j]))
-                myHeap.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
-        }
-    }
-}
+// maxHeap& App::getLocalHeap(string cat, int zipcode, Restaurant* source) {
+//     auto it = allRestaurants[cat].begin();
+//     for(it = allRestaurants[cat].begin(); it != allRestaurants[cat].end(); it++) {
+//         if(it->first == zipcode) {
+//             break;
+//         }
+//     }
+
+//     vector<Restaurant*> restInZip = allRestaurants[cat][zipcode];
+//     for(int i = 0; i < restInZip.size(); i++) {
+//         for(int j = 1; j < restInZip.size(); j++) {
+//             if(!myHeap.isEdge(restInZip[i], restInZip[j]))
+//                 myHeap.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
+//         }
+//     }
+// }

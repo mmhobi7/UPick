@@ -9,10 +9,10 @@ public:
     ~maxHeap();
     void heapPrint();
     int getSize();
-    Restaurant* extractMax();
+    Restaurant *extractMax();
 
 private:
-    heapRestaurant* heapifyDown(int);
+    heapRestaurant *heapifyDown(int);
     heapRestaurant *theHeap;
     int theHeapSize;
 };

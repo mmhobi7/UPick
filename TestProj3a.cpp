@@ -1,6 +1,7 @@
 #include "App.h"
 #include "dataImporter.h"
 #include <time.h>
+#include <iterator> // std::advance
 
 int main()
 {
@@ -8,14 +9,18 @@ int main()
     App uPick;
     // read in all data
     std::cout << "Welcome to YouPick! \n\n";
+    std::cout << "Please wait..." << endl;
+    dataImporter importer("yelp_business.csv");
+    Graph graph;
+    importer.read(uPick, graph);
     std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
-    int i;
-    for (i = 1; i <= uPick.getCategoryList().size(); ++i)
+    int i = 1;
+    for (auto const &x : uPick.getList())
     {
-        std::cout << i << ": " << uPick.getCategoryList()[i - 1] << endl;
+        std::cout << i++ << ": " << x.first << endl;
     }
     std::cout << i++ << ": "
-        << "All" << endl;
+              << "All" << endl;
     std::cout << endl;
     int option = 0;
     cin >> option;
@@ -23,29 +28,35 @@ int main()
     std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
     cin >> choice;
     int zipcode = 0;
-    if (choice == 'Y' || choice == 'y') {
+    if (choice == 'Y' || choice == 'y')
+    {
         cout << "Enter Zipcode: " << endl;
         cin >> zipcode;
     }
     std::cout << "Picking a restaurant now..." << endl;
-    Restaurant* chosen;
-    dataImporter importer("yelp_business.csv");
-    Graph graph;
-    importer.read(uPick, graph);
+    Restaurant *chosen;
     // if all, generate random cuisine
     int size = 0;
+    for (int i = 0; i < 14; i++)
+    {
+        cout << next(uPick.getList().begin(), i)->first << endl;
+        cout << uPick.getCategorySize(i) << endl;
+    }
 
     if (option == 15)
         option = rand() % 15;
     if (choice == 'Y' || choice == 'y')
-        zipcode = uPick.findZip(zipcode, uPick.getCategoryList()[option - 1]);
-    else {
-        size = uPick.getCategorySize(option);
+    {
+        // auto tmp = uPick.getList().begin();
+        // advance(tmp, option - 1);
+        zipcode = uPick.findZip(zipcode, (next(uPick.getList().begin(), option - 1))->first);
+    }
+    else
+    {
+        size = uPick.getCategorySize(option - 1);
         zipcode = rand() % size;
         cout << "random number we generated: " << zipcode << " " << size << endl;
-        auto tmp = uPick.getList()[uPick.getCategoryList()[option - 1]].begin();
-        advance(tmp, zipcode);
-        zipcode = tmp->first;
+        zipcode = (next(uPick.getList()[(next(uPick.getList().begin(), option - 1))->first].begin(), option - 1))->first;
         cout << "Random zipcode is " << zipcode << endl; //TODO: pad with 0's
     }
     size = uPick.getZipcodeSize(option, zipcode);
