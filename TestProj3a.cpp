@@ -17,35 +17,22 @@ int main()
     dataImporter importer("yelp_business.csv");
     Graph tmp;
     importer.read(uPick, tmp);
-    if (option == 1) {
+    // if all, generate random cuisine
+        if(option == 14) {
+            option = rand() % 13;
+        }
 
-    }
-    else if (option == 2) {
+        int size = uPick.getCategorySize(option);
+        int randZipCode = rand() % size;
 
-    }
-    else if (option == 3) {
-
-    }
-    else if (option == 4) {
-
-    }
-    else if (option == 5) {
-
-    }
-    else if (option == 6) {
-
-    }
-    else if (option == 7) {
-
-    }
-    else if (option == 8) {
-
-    }
-    else if (option == 9) {
-
-    }
+        size = uPick.getZipcodeSize(option, randZipCode);
+        int randRest = rand() % size;
+        chosen = uPick.getRestaurant(option, randZipCode, randRest);
+    // generate heap and graph from this restaurant
+    
+    
     std::cout << "\nGreat Choice! Picking a restaurant now...\n\n";
-    std::cout << "We picked \" << " << "\"! Would you like to see related restaurants? (Y/N)\n\n";
+    std::cout << "We picked \" << chosen->getName() << "\"! Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
     char choice;
     while (moreRestaurants) {
