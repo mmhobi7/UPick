@@ -92,9 +92,13 @@ int App::findZip(int zip, string cat)
         int minZip = INT_MAX;
         for (auto iter = allRestaurants[cat].begin(); iter != allRestaurants[cat].end(); ++iter)
         {
-            if (abs(zip - iter->first) < minZip)
+            //cout << abs(iter->first - zip) << endl;
+            if (abs(iter->first - zip) < minZip) {
+                //cout << iter->first << endl;
                 minZip = iter->first;
+            }
         }
+        //cout << minZip << endl;
         return minZip;
     }
 }
@@ -130,13 +134,13 @@ unordered_map<string, std::map<int, vector<Restaurant *>>> App::getList()
     return allRestaurants;
 }
 
-Graph &App::getLocalGraph(string cat, int zipcode, Restaurant *source)
+Graph App::getLocalGraph(string cat, int zipcode, Restaurant *source)
 {
     Graph myGraph;
     int k = 0;
     int end = distance(allRestaurants[cat].find(zipcode), allRestaurants[cat].end());
     // std::map<string, int>::iterator it = myMap.find("myKey");
-    while (myGraph.getSize() <= 26)
+    while (myGraph.getSize() < 26)
     {
         vector<Restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];
         for (int i = 0; i < restInZip.size(); i++)
@@ -156,6 +160,7 @@ Graph &App::getLocalGraph(string cat, int zipcode, Restaurant *source)
         }
         Restaurant *newZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first][0];
         Restaurant *oldZip = restInZip[restInZip.size() - 1];
+
         myGraph.insertEdge(newZip, oldZip, distance(newZip, oldZip));
     }
     return myGraph;

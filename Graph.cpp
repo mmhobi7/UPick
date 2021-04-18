@@ -128,3 +128,7 @@ long long Graph::distance(Restaurant *a, Restaurant *b) {
 int Graph::getSize() {
     return v.size();
 }
+
+Graph::Graph() {
+    index = 0;
+}
