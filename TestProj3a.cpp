@@ -64,8 +64,11 @@ int main()
         std::cout << "Would you like to see related restaurants? (Y/N)\n\n";
         bool moreRestaurants = true;
 
-        // queue<Restaurant*> related = tmp4.bfs(chosen);
+        
+        auto categoryList = uPick.getCategoryList();
+        myGraph = uPick.getLocalGraph(categoryList[option - 1], zipcode, chosen);
 
+        queue<Restaurant*> related = myGraph.bfs(chosen);
         while (moreRestaurants)
         {
             cin >> choice;
@@ -73,7 +76,7 @@ int main()
             {
                 std::cout << "Would you like to see more?" << endl;
                 //print out 5 more choices while maxHeap is not empty
-                /*if(related.size() > 5) {
+                if(related.size() > 5) {
                         size = 5;
                     } else {
                         size = related.size();
@@ -83,7 +86,7 @@ int main()
                         related.pop();
                     }
                 std::cout << "Would you like to see more?" << endl;
-                    }*/
+                    }
             }
             else
                 moreRestaurants = false;
