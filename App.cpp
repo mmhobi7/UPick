@@ -76,18 +76,32 @@ string App::findCategory(string s)
 void App::addRestaurant(Restaurant *obj)
 {
     allRestaurants[obj->getCategory()][obj->getZipcode()].push_back(obj);
-    zipcodes.push_back(obj->getZipcode());
+    // zipcodes.push_back(obj->getZipcode());
 }
 
 int App::getCategorySize(int category) {
     return allRestaurants[categoryList[category - 1]].size();
 }
 
-int App::getZipcodeSize(int category, int zipcode) {
-    return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]].size();
+// int App::getZipcodeSize(int category, int zipcode) {
+//     return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]].size();
+// }
+
+// Restaurant *App::getRestaurant(int category, int zipcode, int index) {
+//     return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]][index];
+// }
+
+int App::getListSize()
+{
+    return allRestaurants.size();
 }
 
-Restaurant *App::getRestaurant(int category, int zipcode, int index) {
-    return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]][index];
+int App::getListZipcodeSize(string key)
+{
+    return allRestaurants[key].size();
 }
 
+unordered_map<string, std::map<int, vector<Restaurant *>>> App::getList()
+{
+    return allRestaurants;
+}

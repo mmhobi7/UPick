@@ -5,11 +5,15 @@ int main()
 {
     App uPick;
     // read in all data
-    std::cout << "Welcome to YouPick!\n\n";
-    std::cout << "Choose a Preferred Cuisine Style [if any]:\n";
-    for (int i = 1; i <= uPick.getCategoryList().size(); ++i) {
-        std::cout << i << ": " << uPick.getCategoryList()[i-1] << endl;
+    std::cout << "Welcome to YouPick! \n\n";
+    std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
+    int i;
+    for (i = 1; i <= uPick.getCategoryList().size(); ++i)
+    {
+        std::cout << i << ": " << uPick.getCategoryList()[i - 1] << endl;
     }
+    std::cout << i++ << ": "
+              << "All" << endl;
     std::cout << endl;
     int option = 0;
     cin >> option;
@@ -32,7 +36,7 @@ int main()
     
     
     std::cout << "\nGreat Choice! Picking a restaurant now...\n\n";
-    std::cout << "We picked \" << chosen->getName() << "\"! Would you like to see related restaurants? (Y/N)\n\n";
+    std::cout << "We picked" << chosen->getName() << endl << "Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
     char choice;
     queue<Restaurant*> related = myGraph.bfs(chosen);
@@ -58,24 +62,6 @@ int main()
     std::cout << "Okay! Enjoy your meal!\n";
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*#include "maxHeap.h"
 #include "Restaurant.h"
