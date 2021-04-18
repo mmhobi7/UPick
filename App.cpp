@@ -88,12 +88,12 @@ int App::findZip(int zip, string cat)
     else
     {
         int minZip = INT_MAX;
-        for (auto iter = allRestaurants[cat].begin(); iter != allRestaurants[cat].begin(); ++iter)
+        for (auto iter = allRestaurants[cat].begin(); iter != allRestaurants[cat].end(); ++iter)
         {
             if (abs(zip - iter->first) < minZip)
-                minZip = zip;
+                minZip = iter->first;
         }
-        return zip;
+        return minZip;
     }
 }
 
@@ -101,14 +101,6 @@ int App::getCategorySize(int category)
 {
     return allRestaurants[categoryList[category - 1]].size();
 }
-
-// int App::getZipcodeSize(int category, int zipcode) {
-//     return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]].size();
-// }
-
-// Restaurant *App::getRestaurant(int category, int zipcode, int index) {
-//     return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]][index];
-// }
 
 int App::getListSize()
 {
@@ -134,3 +126,4 @@ unordered_map<string, std::map<int, vector<Restaurant *>>> App::getList()
 {
     return allRestaurants;
 }
+
