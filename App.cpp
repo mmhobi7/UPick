@@ -92,13 +92,10 @@ int App::findZip(int zip, string cat)
         int minZip = INT_MAX;
         for (auto iter = allRestaurants[cat].begin(); iter != allRestaurants[cat].end(); ++iter)
         {
-            //cout << abs(iter->first - zip) << endl;
-            if (abs(iter->first - zip) < minZip) {
-                //cout << iter->first << endl;
+            if (abs(iter->first - zip) < abs(minZip - zip)) {
                 minZip = iter->first;
             }
         }
-        //cout << minZip << endl;
         return minZip;
     }
 }

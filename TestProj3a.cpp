@@ -35,7 +35,7 @@ int main()
         // if all, generate random cuisine
         int size = 0;
         if (option == 15)
-            option = rand() % 15;
+            option = rand() % 15 + 1;
         if (choice == 'Y' || choice == 'y')
         {
             cout << "Enter Zipcode: " << endl;
@@ -44,11 +44,8 @@ int main()
         }
         else
         {
-            size = uPick.getCategorySize(option - 1);
-            zipcode = rand() % size;
-            cout << "random number we generated: " << zipcode << " " << size << endl;
-            zipcode = (next(uPick.getList()[(next(uPick.getList().begin(), option - 1))->first].begin(), option - 1))->first;
-            cout << "Random zipcode is " << zipcode << endl; //TODO: pad with 0's
+            zipcode = rand() % 99999;
+            zipcode = uPick.findZip(zipcode, (next(uPick.getList().begin(), option - 1))->first);
         }
         size = uPick.getZipcodeSize(option, zipcode);
         int randRest = rand() % size;
