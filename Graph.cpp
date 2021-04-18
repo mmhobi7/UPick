@@ -86,6 +86,37 @@ vector<Restaurant *> Graph::getAdjacent(Restaurant *vertex)
     return adj;
 }
 
+queue<Restaurant *> Graph::bfs(Restaurant* src) {
+    // return top 100 restaurants from bfs
+    std::queue<Restaurant*> relatedRestaurants;
+    std::queue<Restaurant*> q;
+    int v = mapper.size();
+    bool* visited = new bool[v];
+    for(int i = 0; i < v; i++) {
+        visited[i] = false;
+    }
+
+    visited[mapper[src]] = true;
+    q.push(src);
+
+    while(!q.empty() && relatedRestaurants.size() <= 100) {
+        // pop top element,
+        Restaurant* curr = q.front();
+        relatedRestaurants.push(curr);
+        q.pop();
+
+        // add adj elements
+        vector<Restaurant*> adj = this->getAdjacent(curr);
+        for(auto i = adj.begin(); i != adj.end(); i++) {
+            if(!visited[mapper[*i]]) {
+                visited[mapper[*i]] = true;
+                q.push(*i);
+            }
+        }
+    }
+    return relatedRestaurants;
+}
+
 long long Graph::distance(Restaurant *a, Restaurant *b) {
     pair<long long, long long> a_coord;
     pair<long long, long long> b_coord;
