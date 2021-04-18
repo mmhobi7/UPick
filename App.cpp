@@ -76,6 +76,7 @@ string App::findCategory(string s)
 
 void App::addRestaurant(Restaurant *obj)
 {
+    // cout << "Eahttt tjtjt: " << obj->getCategory() << endl;
     allRestaurants[obj->getCategory()][obj->getZipcode()].push_back(obj);
     //zipcodes.push_back(obj->getZipcode());
 }

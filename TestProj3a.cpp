@@ -28,6 +28,21 @@ int main()
     cin >> choice;
     int zipcode = 0;
     int size = 0;
+    int thesize = 0;
+    auto tmp3 = uPick.getList().begin();
+    cout << "here: " << tmp3->first << endl;
+    advance(tmp3,2);
+    cout << "hmere: " << tmp3->first << endl;
+
+    for (auto tmp2 = uPick.getList().begin(); tmp2 != uPick.getList().end(); tmp2++)
+    {
+        cout << "here: " << tmp2->first << endl;
+        // for (auto j = (uPick.getList()[i->second]).begin(); j != (uPick.getList()[i->second]).end(); j++)
+        // {
+        //     cout << j->first << " | " << j->second.size() << " | " << thesize++ << endl;
+        // }
+    }
+
     if (option == 15)
     {
         option = rand() % 15;
