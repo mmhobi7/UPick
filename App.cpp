@@ -119,8 +119,8 @@ int App::getListZipcodeSize(string key)
     return allRestaurants[key].size();
 }
 
-int App::getZipcodeSize(int category, int zipcode)
-{
+int App::getZipcodeSize(int category, int zipcode) {
+    zipcode = findZip(zipcode, getCategoryList()[category - 1]);
     return allRestaurants[categoryList[category - 1]][zipcode].size();
 }
 

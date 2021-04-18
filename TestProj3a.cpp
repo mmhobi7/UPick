@@ -36,7 +36,8 @@ int main()
         }
         else {
             size = uPick.getCategorySize(option);
-            int zipcode = rand() % size;
+            //int zipcode = rand() % size; 
+            // need to properly call a zipcode, should get from list
         }
         size = uPick.getZipcodeSize(option, zipcode);
         int randRest = rand() % size;
@@ -45,7 +46,7 @@ int main()
     // generate heap and graph from this restaurant
     
     std::cout << "\nGreat Choice! Picking a restaurant now...\n\n";
-    std::cout << "We picked" << chosen->getName() << endl << "Would you like to see related restaurants? (Y/N)\n\n";
+    std::cout << "We picked \"" << chosen->getName() << "\"Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
     
     //<Restaurant*> related = temp.bfs(chosen);
