@@ -127,3 +127,21 @@ unordered_map<string, std::map<int, vector<Restaurant *>>> App::getList()
     return allRestaurants;
 }
 
+Graph& App::getLocalGraph(string cat, int zipcode, Restaurant* source) {
+    Graph myGraph;
+    auto it = allRestaurants[cat].begin();
+    for(it = allRestaurants[cat].begin(); it != allRestaurants[cat].end(); it++) {
+        if(it->first == zipcode) {
+            break;
+        }
+    }
+    
+    
+    vector<Restaurant*> restInZip = allRestaurants[cat][zipcode];
+    for(int i = 0; i < restInZip.size(); i++) {
+        for(int j = 1; j < restInZip.size(); j++) {
+            if(!myGraph.isEdge(restInZip[i], restInZip[j]))
+                myGraph.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
+        }
+    }
+}
