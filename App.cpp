@@ -50,7 +50,7 @@ string App::findCategory(string s)
     {
         return s;
     }
-    else if (s == "Chinese" || s == "Japanese" || s == "Korean")
+    else if (s == "Chinese" || s == "Japanese" || s == "Korean" || s == "Thai")
     {
         return "Asian";
     }
@@ -73,4 +73,18 @@ string App::findCategory(string s)
 void App::addRestaurant(Restaurant *obj)
 {
     allRestaurants[obj->getCategory()][obj->getZipcode()].push_back(obj);
+    zipcodes.push_back(obj->getZipcode());
 }
+
+int App::getCategorySize(int category) {
+    return allRestaurants[categoryList[category - 1]].size();
+}
+
+int App::getZipcodeSize(int category, int zipcode) {
+    return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]].size();
+}
+
+Restaurant *App::getRestaurant(int category, int zipcode, int index) {
+    return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]][index];
+}
+
