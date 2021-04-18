@@ -35,6 +35,8 @@ int main()
     std::cout << "We picked \" << chosen->getName() << "\"! Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
     char choice;
+    queue<Restaurant*> related = myGraph.bfs(chosen);
+    
     while (moreRestaurants) {
             cin >> choice;
             if (choice == 'Y') {
