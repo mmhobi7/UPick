@@ -137,15 +137,25 @@ Graph& App::getLocalGraph(string cat, int zipcode, Restaurant* source) {
             break;
         }
     }
-    
-    
-    vector<Restaurant*> restInZip = allRestaurants[cat][zipcode];
-    for(int i = 0; i < restInZip.size(); i++) {
-        for(int j = 1; j < restInZip.size(); j++) {
-            if(!myGraph.isEdge(restInZip[i], restInZip[j]))
-                myGraph.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
+
+    while(myGraph.getSize() <= 26) {
+        vector<Restaurant *> restInZip = allRestaurants[cat][it->first];
+        for (int i = 0; i < restInZip.size(); i++) {
+            for (int j = 1; j < restInZip.size(); j++) {
+                if (!myGraph.isEdge(restInZip[i], restInZip[j]))
+                    myGraph.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
+            }
         }
+
+        if(it == allRestaurants[cat].end()) {
+            break;
+        }
+        advance(it, 1);
+        Restaurant* newZip = allRestaurants[cat][it->first][0];
+        Restaurant* oldZip = restInZip[restInZip.size() - 1];
+        myGraph.insertEdge(newZip, oldZip, distance(newZip, oldZip));
     }
+    return myGraph;
 }
 
 maxHeap& App::getLocalHeap(string cat, int zipcode, Restaurant* source) {
