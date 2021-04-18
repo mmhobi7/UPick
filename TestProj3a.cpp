@@ -20,9 +20,9 @@ int main()
     cin >> option;
     char choice;
     Restaurant *chosen;
-    dataImporter importer("/Users/wylyyant/CLionProjects/YouPickProject/yelp_business.csv");
-    Graph tmp4;
-    importer.read(uPick, tmp4);
+    // dataImporter importer("/Users/wylyyant/CLionProjects/YouPickProject/yelp_business.csv");
+    // Graph tmp4;
+    // importer.read(uPick, tmp4);
     dataImporter importer("yelp_business.csv");
     Graph tmp;
     importer.read(uPick, tmp);
@@ -64,7 +64,7 @@ int main()
               << "Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
 
-    queue<Restaurant*> related = tmp4.bfs(chosen);
+    // queue<Restaurant*> related = tmp4.bfs(chosen);
 
     while (moreRestaurants)
     {
