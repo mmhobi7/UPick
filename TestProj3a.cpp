@@ -57,9 +57,7 @@ int main()
         std::cout << "Would you like to see related restaurants? (Y/N)\n\n";
         bool moreRestaurants = true;
 
-        
-        auto categoryList = uPick.getCategoryList();
-        myGraph = uPick.getLocalGraph(categoryList[option - 1], zipcode, chosen);
+        graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
 
         queue<Restaurant*> related = myGraph.bfs(chosen);
         while (moreRestaurants)
