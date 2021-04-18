@@ -7,7 +7,7 @@ int main()
     srand(time(NULL)); // set random's seed
     App uPick;
     // read in all data
-    std::cout << "Welcome to YouPick! \n\n";
+    std::cout << "Welcome to YouPick! \n\n"; 
     std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
     int i;
     for (i = 1; i <= uPick.getCategoryList().size(); ++i)

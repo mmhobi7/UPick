@@ -27,7 +27,7 @@ string Restaurant::getName()
 
 double Restaurant::getRating()
 {
-    return rating;
+    return rating; 
 }
 
 string Restaurant::getAddress()
