@@ -10,7 +10,7 @@ class dataImporter
 public:
     dataImporter(std::string);
     ~dataImporter();
-    void read(App& myApp, Graph& myGraph);
+    void read(App &myApp, Graph &myGraph);
 
 private:
     std::string fileName;
