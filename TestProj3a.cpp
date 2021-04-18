@@ -34,7 +34,7 @@ int main()
         Restaurant *chosen;
         // if all, generate random cuisine
         int size = 0;
-        if (option == 15)
+        if (option == 14)
             option = rand() % 15 + 1;
         if (choice == 'Y' || choice == 'y')
         {
@@ -63,7 +63,7 @@ int main()
         while (moreRestaurants)
         {
             cin >> choice;
-            if (choice == 'Y')
+            if (choice == 'Y' || choice == 'y')
             {
                 std::cout << "Would you like to see more?" << endl;
                 //print out 5 more choices while maxHeap is not empty
