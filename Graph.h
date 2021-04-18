@@ -24,6 +24,7 @@ public:
     int getWeight(Restaurant *from, Restaurant *to);
     vector<Restaurant *> getAdjacent(Restaurant *vertex);
     long long distance(Restaurant* a, Restaurant* b);
+    int getSize();
 
     // bfs
     queue<Restaurant*> bfs(Restaurant* src);
