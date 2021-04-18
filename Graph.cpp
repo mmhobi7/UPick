@@ -85,3 +85,10 @@ vector<Restaurant *> Graph::getAdjacent(Restaurant *vertex)
     sort(adj.begin(), adj.end());
     return adj;
 }
+
+long long Graph::distance(Restaurant *a, Restaurant *b) {
+    pair<long long, long long> a_coord;
+    pair<long long, long long> b_coord;
+
+    return sqrt(pow(b_coord.first - a_coord.first, 2) + pow(b_coord.second - a_coord.second, 2));
+}
