@@ -11,7 +11,7 @@ int main()
     bool keepPicking = true;
     std::cout << "Welcome to YouPick!" << endl
               << endl;
-    std::cout << "Please wait.." << endl;
+    std::cout << "Please wait..." << endl;
 
     dataImporter importer("yelp_business.csv");
     Graph graph;
@@ -31,21 +31,17 @@ int main()
         std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
         cin >> choice;
         int zipcode = 0;
+        Restaurant *chosen;
+        // if all, generate random cuisine
+        int size = 0;
+        if (option == 15)
+            option = rand() % 15;
         if (choice == 'Y' || choice == 'y')
         {
             cout << "Enter Zipcode: " << endl;
             cin >> zipcode;
-        }
-        std::cout << "\nPicking a restaurant now...\n\n";
-        Restaurant *chosen;
-        // if all, generate random cuisine
-        int size = 0;
-
-        if (option == 15)
-            option = rand() % 15;
-        cout << option << endl;
-        if (choice == 'Y' || choice == 'y')
             zipcode = uPick.findZip(zipcode, (next(uPick.getList().begin(), option - 1))->first);
+        }
         else
         {
             size = uPick.getCategorySize(option - 1);
@@ -58,7 +54,7 @@ int main()
         int randRest = rand() % size;
         chosen = uPick.getRestaurant(option, zipcode, randRest);
         // generate heap and graph from this restaurant
-
+        std::cout << "\nPicking a restaurant now...\n\n";
         std::cout << "We picked: ";
         chosen->print();
         std::cout << "Would you like to see related restaurants? (Y/N)\n\n";
@@ -89,8 +85,8 @@ int main()
                 moreRestaurants = false;
         }
         std::cout << "Would you like to pick again? (Y/N)" << endl;
-        cin >> option;
-        if (option == 'N' || option == 'n')
+        cin >> choice;
+        if (choice == 'N' || choice == 'n')
             keepPicking = false;
     }
     std::cout << "Okay! Enjoy your meal!\n";
