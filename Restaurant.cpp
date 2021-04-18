@@ -57,5 +57,8 @@ std::pair<long long, long long> Restaurant::getCoords()
 
 void Restaurant::print()
 {
-    cout << "Name: " << getName() << " Rating: " << getRating() << " Category: " << getCategory() << " ZipCode: " << getZipcode() << endl;
+    cout << "Name: " << getName() << " Rating: " << getRating() << " Category: " << getCategory() << " Zipcode: ";
+    if (getZipcode() < 10000) // if zipcode has 4 digits bc 1st digit is 0
+        cout << "0";
+    cout << getZipcode() << endl;
 }

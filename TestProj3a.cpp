@@ -1,5 +1,6 @@
 #include "App.h"
 #include "dataImporter.h"
+#include <time.h>
 
 int main()
 {
@@ -14,37 +15,31 @@ int main()
         std::cout << i << ": " << uPick.getCategoryList()[i - 1] << endl;
     }
     std::cout << i++ << ": "
-              << "All" << endl;
+        << "All" << endl;
     std::cout << endl;
     int option = 0;
     cin >> option;
     char choice;
-    Restaurant *chosen;
-    // dataImporter importer("/Users/wylyyant/CLionProjects/YouPickProject/yelp_business.csv");
-    // Graph tmp4;
-    // importer.read(uPick, tmp4);
-    dataImporter importer("yelp_business.csv");
-    Graph tmp;
-    importer.read(uPick, tmp);
-    // if all, generate random cuisine
     std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
     cin >> choice;
     int zipcode = 0;
+    if (choice == 'Y' || choice == 'y') {
+        cout << "Enter Zipcode: " << endl;
+        cin >> zipcode;
+    }
+    std::cout << "Picking a restaurant now..." << endl;
+    Restaurant* chosen;
+    dataImporter importer("yelp_business.csv");
+    Graph graph;
+    importer.read(uPick, graph);
+    // if all, generate random cuisine
     int size = 0;
-    int thesize = 0;
-    auto tmp3 = uPick.getList().begin();
 
     if (option == 15)
-    {
         option = rand() % 15;
-    }
     if (choice == 'Y' || choice == 'y')
-    {
-        cin >> zipcode;
         zipcode = uPick.findZip(zipcode, uPick.getCategoryList()[option - 1]);
-    }
-    else
-    {
+    else {
         size = uPick.getCategorySize(option);
         zipcode = rand() % size;
         cout << "random number we generated: " << zipcode << " " << size << endl;
