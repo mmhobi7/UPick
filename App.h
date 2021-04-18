@@ -25,6 +25,6 @@ public:
     int getListSize();
     int getListZipcodeSize(string);
     unordered_map<string, std::map<int, vector<Restaurant *>>> getList();
-    Graph &getLocalGraph(string cat, int zipcode, Restaurant *source);
+    Graph getLocalGraph(string cat, int zipcode, Restaurant *source);
     // maxHeap& getLocalHeap(string cat, int zipcode, Restaurant* source);
 };

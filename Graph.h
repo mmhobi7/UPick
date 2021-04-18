@@ -19,6 +19,7 @@ private:
     int index;
 
 public:
+    Graph();
     void insertEdge(Restaurant *from, Restaurant *to, int weight);
     bool isEdge(Restaurant *from, Restaurant *to);
     int getWeight(Restaurant *from, Restaurant *to);
