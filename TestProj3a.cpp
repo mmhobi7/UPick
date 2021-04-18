@@ -36,14 +36,18 @@ int main()
     bool moreRestaurants = true;
     char choice;
     while (moreRestaurants) {
-        cin >> choice;
-        if (choice == 'Y') {
-            std::cout << "Would you like to see more?" << endl;
-            //print out 5 more choices while maxHeap is not empty
+            cin >> choice;
+            if (choice == 'Y') {
+                std::cout << "Would you like to see more?" << endl;
+                //print out 5 more choices while maxHeap is not empty
+                for(int i = 0; i < 5; i++) {
+                    related.front()->print();
+                    related.pop();
+                }
+            }
+            else
+                moreRestaurants = false;
         }
-        else
-            moreRestaurants = false;
-    }
     std::cout << "Okay! Enjoy your meal!\n";
     return 0;
 }
