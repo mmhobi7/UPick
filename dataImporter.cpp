@@ -23,10 +23,10 @@ void dataImporter::read(App &myApp, Graph &myGraph)
     string line;
     bool is_restaurant = false;
     int count = 0;
+    int numRestaurants = 0;
 
     getline(fileStream, temp); // parse through column names (dont need)
-    while (!fileStream.eof())
-    {
+    while (!fileStream.eof()) {
         count++;
         getline(fileStream, temp, ','); // row number (dont need)
         getline(fileStream, id, ',');
@@ -45,7 +45,6 @@ void dataImporter::read(App &myApp, Graph &myGraph)
         getline(fileStream, temp, ',');     // num reviews (dont need)
         getline(fileStream, temp, ',');     // is open (dont need)
         getline(fileStream, line);          // list of categories
-
         latitude = stoll(s_latitude);
         longitude = stoll(s_longitude);
         rating = stod(s_rating);
@@ -55,8 +54,7 @@ void dataImporter::read(App &myApp, Graph &myGraph)
 
         // parse thru categories string to see if any categories are familiar
         // if it category was not found in the name
-        if (!is_restaurant)
-        {
+        if (!is_restaurant) {
             istringstream iss2(line);
             s = "";
             while (!iss2.eof())
@@ -65,22 +63,17 @@ void dataImporter::read(App &myApp, Graph &myGraph)
                 category = myApp.findCategory(s);
                 if (category != "")
                 {
-                    //is_restaurant = true
-                    if (zipCode.length() == 5)
-                    {
-                        Restaurant *tmp = new Restaurant(name, rating, address, category, stoi(zipCode), longitude, latitude);
-                        myApp.addRestaurant(tmp);
-                        tmp->print();
+                    is_restaurant = true;
+                    if (zipCode.length() == 5) {
+                        myApp.addRestaurant(new Restaurant(name, rating, address, category, stoi(zipCode), longitude, latitude));
                     }
                     break;
                 }
             }
         }
-        /*
-        if(!is_restaurant)
-           category = "other";
-
-        myApp.addRestaurant(new Restaurant(name, rating, address, category, longitude, latitude));*/
+        /*if(!is_restaurant)
+           category = "other";*/
         is_restaurant = false;
     }
+
 }

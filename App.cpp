@@ -3,15 +3,17 @@
 App::App()
 {
     setCategoryList();
+    setCategorySet();
 }
 
 void App::setCategoryList()
 {
     categoryList.push_back("American");
-    categoryList.push_back("Asian");
+    categoryList.push_back("Asian Fusion");
     categoryList.push_back("Bars");
     categoryList.push_back("Breakfast");
-    categoryList.push_back("Fast");
+    categoryList.push_back("Coffee & Tea");
+    categoryList.push_back("Fast Food");
     categoryList.push_back("Halal");
     categoryList.push_back("Indian");
     categoryList.push_back("Latin");
@@ -28,6 +30,7 @@ void App::setCategorySet()
     categorySet.insert("Asian");
     categorySet.insert("Bars");
     categorySet.insert("Breakfast");
+    categorySet.insert("Coffee");
     categorySet.insert("Fast");
     categorySet.insert("Halal");
     categorySet.insert("Indian");

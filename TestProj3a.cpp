@@ -14,7 +14,7 @@ int main()
     int option = 0;
     cin >> option;
     Restaurant* chosen;
-    dataImporter importer("/home/aaahh/p3/UPick/yelp_business.csv");
+    dataImporter importer("yelp_business.csv");
     Graph tmp;
     importer.read(uPick, tmp);
     // if all, generate random cuisine
