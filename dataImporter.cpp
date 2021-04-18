@@ -7,10 +7,9 @@ dataImporter::dataImporter(std::string file)
 {
     fileName = file;
     fileStream.open(fileName);
-    cout << "ao"<< fileStream.is_open() << endl;
     if (!fileStream.is_open())
     {
-        cout << "File " << fileName << "not found. " << endl;
+        cout << "File " << fileName << " not found. " << endl;
         exit(1);
     }
 }

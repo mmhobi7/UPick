@@ -3,6 +3,7 @@
 
 int main()
 {
+    srand(time(NULL)); // set random's seed
     App uPick;
     // read in all data
     std::cout << "Welcome to YouPick! \n\n";
@@ -39,8 +40,12 @@ int main()
     else
     {
         size = uPick.getCategorySize(option);
-        //int zipcode = rand() % size;
-        // need to properly call a zipcode, should get from list
+        zipcode = rand() % size;
+        cout << "random number we generated: " << zipcode << " " << size << endl;
+        auto tmp = uPick.getList()[uPick.getCategoryList()[option - 1]].begin();
+        advance(tmp, zipcode);
+        zipcode = tmp->first;
+        cout << "Random zipcode is " << zipcode << endl; //TODO: pad with 0's
     }
     size = uPick.getZipcodeSize(option, zipcode);
     int randRest = rand() % size;
@@ -49,7 +54,7 @@ int main()
     // generate heap and graph from this restaurant
 
     std::cout << "\nGreat Choice! Picking a restaurant now...\n\n";
-    std::cout << "We picked" << chosen->getName() << endl
+    std::cout << "We picked " << chosen->getName() << endl
               << "Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
 
