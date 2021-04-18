@@ -1,5 +1,5 @@
 #include "App.h"
-#include <limits>
+#include <climits>
 
 App::App()
 {

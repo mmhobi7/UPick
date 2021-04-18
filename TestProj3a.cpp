@@ -23,26 +23,29 @@ int main()
     Graph tmp;
     importer.read(uPick, tmp);
     // if all, generate random cuisine
-        std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
-        cin >> choice;
-        int zipcode = 0;
-        int size = 0;
-        if (option == 15) {
-            option = rand() % 15;
-        }
-        if (choice == 'Y' || choice == 'y') {
-            cin >> zipcode;
-            zipcode = uPick.findZip(zipcode, uPick.getCategoryList()[option - 1]);
-        }
-        else {
-            size = uPick.getCategorySize(option);
-            //int zipcode = rand() % size; 
-            // need to properly call a zipcode, should get from list
-        }
-        size = uPick.getZipcodeSize(option, zipcode);
-        int randRest = rand() % size;
-        chosen = uPick.getRestaurant(option, zipcode, randRest);
-       
+    std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
+    cin >> choice;
+    int zipcode = 0;
+    int size = 0;
+    if (option == 15)
+    {
+        option = rand() % 15;
+    }
+    if (choice == 'Y' || choice == 'y')
+    {
+        cin >> zipcode;
+        zipcode = uPick.findZip(zipcode, uPick.getCategoryList()[option - 1]);
+    }
+    else
+    {
+        size = uPick.getCategorySize(option);
+        //int zipcode = rand() % size;
+        // need to properly call a zipcode, should get from list
+    }
+    size = uPick.getZipcodeSize(option, zipcode);
+    int randRest = rand() % size;
+    chosen = uPick.getRestaurant(option, zipcode, randRest);
+
     // generate heap and graph from this restaurant
 
     std::cout << "\nGreat Choice! Picking a restaurant now...\n\n";
