@@ -42,6 +42,11 @@ int main()
             if (choice == 'Y') {
                 std::cout << "Would you like to see more?" << endl;
                 //print out 5 more choices while maxHeap is not empty
+                if(related.size() > 5) {
+                    size = 5;
+                } else {
+                    size = related.size();
+                }
                 for(int i = 0; i < 5; i++) {
                     related.front()->print();
                     related.pop();
