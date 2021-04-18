@@ -76,7 +76,20 @@ string App::findCategory(string s)
 void App::addRestaurant(Restaurant *obj)
 {
     allRestaurants[obj->getCategory()][obj->getZipcode()].push_back(obj);
-    zipcodes.push_back(obj->getZipcode());
+    //zipcodes.push_back(obj->getZipcode());
+}
+
+int App::findZip(int zip, string cat) {
+    if (allRestaurants[cat].find(zip) != allRestaurants[cat].end())
+        return zip;
+    else {
+        int minZip = INT_MAX;
+        for (auto iter = allRestaurants[cat].begin(); iter != allRestaurants[cat].begin(); ++iter) {
+            if (abs(zip - iter->first) < minZip)
+                minZip = zip;
+        }
+        return zip;
+    }
 }
 
 int App::getCategorySize(int category) {
@@ -84,10 +97,10 @@ int App::getCategorySize(int category) {
 }
 
 int App::getZipcodeSize(int category, int zipcode) {
-    return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]].size();
+    return allRestaurants[categoryList[category - 1]][zipcode].size();
 }
 
 Restaurant *App::getRestaurant(int category, int zipcode, int index) {
-    return allRestaurants[categoryList[category - 1]][zipcodes[zipcode]][index];
+    return allRestaurants[categoryList[category - 1]][zipcode][index];
 }
 

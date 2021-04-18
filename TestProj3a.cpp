@@ -13,36 +13,45 @@ int main()
     std::cout << endl;
     int option = 0;
     cin >> option;
+    char choice;
     Restaurant* chosen;
     dataImporter importer("yelp_business.csv");
     Graph tmp;
     importer.read(uPick, tmp);
     // if all, generate random cuisine
-        if(option == 14) {
-            option = rand() % 13;
+        std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
+        cin >> choice;
+        int zipcode = 0;
+        int size = 0;
+        if (option == 15) {
+            option = rand() % 15;
         }
-
-        int size = uPick.getCategorySize(option);
-        int randZipCode = rand() % size;
-
-        size = uPick.getZipcodeSize(option, randZipCode);
+        if (choice == 'Y' || choice == 'y') {
+            cin >> zipcode;
+            zipcode = uPick.findZip(zipcode, uPick.getCategoryList()[option - 1]);
+        }
+        else {
+            size = uPick.getCategorySize(option);
+            int zipcode = rand() % size;
+        }
+        size = uPick.getZipcodeSize(option, zipcode);
         int randRest = rand() % size;
-        chosen = uPick.getRestaurant(option, randZipCode, randRest);
+        chosen = uPick.getRestaurant(option, zipcode, randRest);
+        
     // generate heap and graph from this restaurant
     
-    
     std::cout << "\nGreat Choice! Picking a restaurant now...\n\n";
-    std::cout << "We picked \" << chosen->getName() << "\"! Would you like to see related restaurants? (Y/N)\n\n";
+    std::cout << "We picked \"" << chosen->getName() << "\"! Would you like to see related restaurants? (Y/N)\n\n";
     bool moreRestaurants = true;
-    char choice;
-    queue<Restaurant*> related = myGraph.bfs(chosen);
+    
+    //<Restaurant*> related = temp.bfs(chosen);
     
     while (moreRestaurants) {
             cin >> choice;
             if (choice == 'Y') {
                 std::cout << "Would you like to see more?" << endl;
                 //print out 5 more choices while maxHeap is not empty
-                if(related.size() > 5) {
+                /*if(related.size() > 5) {
                     size = 5;
                 } else {
                     size = related.size();
@@ -50,7 +59,7 @@ int main()
                 for(int i = 0; i < size; i++) {
                     related.front()->print();
                     related.pop();
-                }
+                }*/
             }
             else
                 moreRestaurants = false;
