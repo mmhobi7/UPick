@@ -81,7 +81,6 @@ queue<restaurant *> minHeap::bfs(restaurant *src)
 {
     // return top 5 restaurants from heap
     std::queue<restaurant *> relatedRestaurants;
-    cout << extractMax()->getName() << endl;
     relatedRestaurants.push(extractMax());
     relatedRestaurants.push(extractMax());
     relatedRestaurants.push(extractMax());

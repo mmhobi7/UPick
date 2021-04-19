@@ -132,7 +132,6 @@ graph app::getLocalGraph(string cat, int zipcode, restaurant *source)
         k++;
         if (k > end - 2)
         {
-            cout << "BREAK" << endl;
             break;
         }
         restaurant *newZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first][0];
