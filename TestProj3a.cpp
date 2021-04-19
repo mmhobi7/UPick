@@ -34,7 +34,7 @@ int main()
         Restaurant *chosen;
         // if all, generate random cuisine
         int size = 0;
-        if (option == 14)
+        if (option == 15)
             option = rand() % 15 + 1;
         if (choice == 'Y' || choice == 'y')
         {
@@ -60,12 +60,12 @@ int main()
         graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
 
         queue<Restaurant*> related = graph.bfs(chosen);
+        related.pop();
         while (moreRestaurants)
         {
             cin >> choice;
             if (choice == 'Y' || choice == 'y')
             {
-                std::cout << "Would you like to see more?" << endl;
                 //print out 5 more choices while maxHeap is not empty
                 if(related.size() > 5) {
                         size = 5;
@@ -73,10 +73,15 @@ int main()
                         size = related.size();
                     }
                     for(int i = 0; i < size; i++) {
+                        cout << i + 1 << ": ";
                         related.front()->print();
                         related.pop();
                     }
-                std::cout << "Would you like to see more?" << endl;
+                    if (related.empty()) {
+                        std::cout << endl << "No more related restaurants!" << endl << endl;
+                        break;
+                    }
+                    std::cout << "Would you like to see more?" << endl;
                     }
             else
                 moreRestaurants = false;
