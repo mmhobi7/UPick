@@ -1,14 +1,16 @@
 #include "maxHeap.h"
 #include "Restaurant.h"
 
-// credits Muhamed Hobi Stepik 6.1.1
+// credits Shane Malone Stepik 6.1.1
 
 #include <iostream>
 #include <queue>
+#include <math.h>
 
 maxHeap::maxHeap(int size)
 {
-    theHeapSize = size;
+    theHeapSize = 0;
+    max = size;
     theHeap = new heapRestaurant[size];
 }
 
@@ -27,6 +29,13 @@ void maxHeap::heapPrint()
 int maxHeap::getSize()
 {
     return theHeapSize;
+}
+
+void maxHeap::insert(heapRestaurant item)
+{
+    theHeap[theHeapSize] = item;
+    theHeapSize++;
+    theHeap = heapifyDown(0);
 }
 
 Restaurant *maxHeap::extractMax()
@@ -58,4 +67,25 @@ heapRestaurant *maxHeap::heapifyDown(int index)
     }
     else
         return theHeap;
+}
+
+long long maxHeap::distance(Restaurant *a, Restaurant *b)
+{
+    pair<long long, long long> a_coord;
+    pair<long long, long long> b_coord;
+
+    return sqrt(abs(pow(b_coord.first - a_coord.first, 2)) + abs(pow(b_coord.second - a_coord.second, 2)));
+}
+
+queue<Restaurant *> maxHeap::bfs(Restaurant *src)
+{
+    // return top 100 restaurants from bfs
+    std::queue<Restaurant *> relatedRestaurants;
+    cout << extractMax()->getName() << endl;
+    relatedRestaurants.push(extractMax());
+    relatedRestaurants.push(extractMax());
+    relatedRestaurants.push(extractMax());
+    relatedRestaurants.push(extractMax());
+    relatedRestaurants.push(extractMax());
+    return relatedRestaurants;
 }

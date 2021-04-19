@@ -14,8 +14,7 @@ int main()
     std::cout << "Please wait..." << endl;
 
     dataImporter importer("yelp_business.csv");
-    Graph graph;
-    importer.read(uPick, graph);
+    importer.read(uPick);
     while (keepPicking)
     {
         std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
@@ -26,10 +25,10 @@ int main()
         }
         std::cout << i++ << ": All" << endl; 
         int option = 0;
-        cin >> option;
+        std::cin >> option;
         char choice;
         std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
-        cin >> choice;
+        std::cin >> choice;
         int zipcode = 0;
         Restaurant *chosen;
         // if all, generate random cuisine
@@ -39,7 +38,7 @@ int main()
         if (choice == 'Y' || choice == 'y')
         {
             cout << "Enter Zipcode: " << endl;
-            cin >> zipcode;
+            std::cin >> zipcode;
             zipcode = uPick.findZip(zipcode, (next(uPick.getList().begin(), option - 1))->first);
         }
         else
@@ -57,27 +56,31 @@ int main()
         std::cout << "Would you like to see related restaurants? (Y/N)\n\n";
         bool moreRestaurants = true;
 
-        graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        Graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        maxHeap heap =  uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
 
-        queue<Restaurant*> related = graph.bfs(chosen);
-        related.pop();
+        queue<Restaurant*> relatedGraph = graph.bfs(chosen);
+        relatedGraph.pop();
+        // queue<Restaurant*> relatedGraph = heap.bfs(chosen);
+        // relatedGraph.pop();
+
         while (moreRestaurants)
         {
-            cin >> choice;
+            std::cin >> choice;
             if (choice == 'Y' || choice == 'y')
             {
                 //print out 5 more choices while maxHeap is not empty
-                if(related.size() > 5) {
+                if(relatedGraph.size() > 5) {
                         size = 5;
                     } else {
-                        size = related.size();
+                        size = relatedGraph.size();
                     }
                     for(int i = 0; i < size; i++) {
                         cout << i + 1 << ": ";
-                        related.front()->print();
-                        related.pop();
+                        relatedGraph.front()->print();
+                        relatedGraph.pop();
                     }
-                    if (related.empty()) {
+                    if (relatedGraph.empty()) {
                         std::cout << endl << "No more related restaurants!" << endl << endl;
                         break;
                     }
@@ -87,7 +90,7 @@ int main()
                 moreRestaurants = false;
         }
         std::cout << "Would you like to pick again? (Y/N)" << endl;
-        cin >> choice;
+        std::cin >> choice;
         if (choice == 'N' || choice == 'n')
             keepPicking = false;
     }

@@ -92,7 +92,10 @@ int App::findZip(int zip, string cat)
         int minZip = INT_MAX;
         for (auto iter = allRestaurants[cat].begin(); iter != allRestaurants[cat].end(); ++iter)
         {
-            if (abs(iter->first - zip) < abs(minZip - zip)) {
+            //cout << abs(iter->first - zip) << endl;
+            if (abs(iter->first - zip) < minZip)
+            {
+                //cout << iter->first << endl;
                 minZip = iter->first;
             }
         }
@@ -158,25 +161,33 @@ Graph App::getLocalGraph(string cat, int zipcode, Restaurant *source)
         Restaurant *newZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first][0];
         Restaurant *oldZip = restInZip[restInZip.size() - 1];
 
-        myGraph.insertEdge(newZip, oldZip, distance(newZip, oldZip));
+        myGraph.insertEdge(newZip, oldZip, myGraph.distance(newZip, oldZip));
     }
     return myGraph;
 }
 
-// maxHeap& App::getLocalHeap(string cat, int zipcode, Restaurant* source) {
-//     maxHeap myHeap;
-//     auto it = allRestaurants[cat].begin();
-//     for(it = allRestaurants[cat].begin(); it != allRestaurants[cat].end(); it++) {
-//         if(it->first == zipcode) {
-//             break;
-//         }
-//     }
-
-//     vector<Restaurant*> restInZip = allRestaurants[cat][zipcode];
-//     for(int i = 0; i < restInZip.size(); i++) {
-//         for(int j = 1; j < restInZip.size(); j++) {
-//             if(!myHeap.isEdge(restInZip[i], restInZip[j]))
-//                 myHeap.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
-//         }
-//     }
-// }
+maxHeap App::getLocalHeap(string cat, int zipcode, Restaurant *source)
+{
+    maxHeap myHeap(26);
+    int k = 0;
+    int end = distance(allRestaurants[cat].find(zipcode), allRestaurants[cat].end());
+    // std::map<string, int>::iterator it = myMap.find("myKey");
+    while (myHeap.getSize() < 26)
+    {
+        vector<Restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];
+        for (int i = 0; i < restInZip.size(); i++)
+        {
+            if (myHeap.getSize() < 26)
+            {
+                heapRestaurant tmp(restInZip[i], myHeap.distance(source, restInZip[i]));
+                myHeap.insert(tmp);
+            }
+        }
+        k++;
+        if (k == end - 1)
+        {
+            break;
+        }
+    }
+    return myHeap;
+}

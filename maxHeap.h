@@ -9,10 +9,15 @@ public:
     ~maxHeap();
     void heapPrint();
     int getSize();
+    void insert(heapRestaurant);
     Restaurant *extractMax();
+    long long distance(Restaurant *, Restaurant *);
+    queue<Restaurant *> bfs(Restaurant* src);
 
 private:
+    maxHeap();
     heapRestaurant *heapifyDown(int);
     heapRestaurant *theHeap;
     int theHeapSize;
+    int max;
 };
