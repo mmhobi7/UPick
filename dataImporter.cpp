@@ -81,16 +81,16 @@ void dataImporter::read(app &myApp)
             while (!iss2.eof())
             {
                 iss2 >> s;
-                category = myApp.findCategory(s);
-                if (category != "")
-                {
+                // category = myApp.findCategory(s);
+                // if (category != "")
+                // {
                     is_restaurant = true;
                     if (isValidZipcode(zipcode))
                     {
-                        myApp.addRestaurant(new restaurant(name, rating, address, category, stoi(zipcode), longitude, latitude));
+                        myApp.addRestaurant(new restaurant(name, rating, address, s, stoi(zipcode), longitude, latitude));
                     }
                     break;
-                }
+                // }
             }
         }
         is_restaurant = false;
