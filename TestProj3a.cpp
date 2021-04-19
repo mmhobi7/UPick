@@ -7,7 +7,7 @@ int main()
 {
     srand(time(NULL)); // set random's seed
     app uPick;
-    bool keepPicking = true;
+    bool userContinue = true;
     std::cout << "Welcome to YouPick!" << endl
               << endl;
     std::cout << "Please wait..." << endl
@@ -15,7 +15,7 @@ int main()
 
     dataImporter importer("yelp_business.csv");
     importer.read(uPick); // read in all data
-    while (keepPicking)
+    while (userContinue)
     {
         std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
         int i = 1;
@@ -117,7 +117,7 @@ int main()
         std::cout << "Would you like to pick another restaurant? (Y/N)" << endl;
         cin >> choice;
         if (choice == 'N' || choice == 'n')
-            keepPicking = false;
+            userContinue = false;
     }
     std::cout << "Enjoy your meal! Thank you for using YouPick.\n";
     return 0;
