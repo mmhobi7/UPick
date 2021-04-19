@@ -14,8 +14,7 @@ int main()
     std::cout << "Please wait..." << endl << endl;
 
     dataImporter importer("yelp_business.csv");
-    Graph graph;
-    importer.read(uPick, graph);
+    importer.read(uPick);
     while (keepPicking)
     {
         std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
@@ -26,7 +25,7 @@ int main()
         }
         std::cout << i++ << ": All" << endl << endl; 
         int option = 0;
-        cin >> option;
+        std::cin >> option;
         char choice;
         std::cout << endl << "Do you wish to enter a ZIP code? (Y/N)" << endl;
         cin >> choice;
@@ -57,7 +56,13 @@ int main()
         std::cout << endl << "Would you like to see related restaurants? (Y/N)\n";
         bool moreRestaurants = true;
 
-        graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        Graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        maxHeap heap =  uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+
+        queue<Restaurant*> relatedGraph = graph.bfs(chosen);
+        relatedGraph.pop();
+        // queue<Restaurant*> relatedGraph = heap.bfs(chosen);
+        // relatedGraph.pop();
 
         queue<Restaurant*> related = graph.bfs(chosen);
         related.pop();
@@ -71,10 +76,10 @@ int main()
                 if (counter == 1)
                     cout << "Here are some more " << next(uPick.getList().begin(), option - 1)->first << " restaurants near you.\n\n";
                 //print out 5 more choices while maxHeap is not empty
-                if(related.size() > 5) {
+                if(relatedGraph.size() > 5) {
                         size = 5;
                     } else {
-                        size = related.size();
+                        size = relatedGraph.size();
                     }
                     for(int i = 0; i < size; i++) {
                         cout << counter++ << ": ";
@@ -82,7 +87,7 @@ int main()
                         cout << endl;
                         related.pop();
                     }
-                    if (related.empty()) {
+                    if (relatedGraph.empty()) {
                         std::cout << endl << "No more related restaurants!" << endl << endl;
                         break;
                     }

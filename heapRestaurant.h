@@ -3,8 +3,11 @@
 
 using namespace std;
 
-struct heapRestaurant
+class heapRestaurant
 {
-    Restaurant* item;
+public:
+    heapRestaurant(Restaurant *, long long);
+    heapRestaurant();
+    Restaurant *item;
     long long distance;
 };

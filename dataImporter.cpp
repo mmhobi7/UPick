@@ -17,7 +17,7 @@ dataImporter::~dataImporter()
 {
     fileStream.close();
 }
-void dataImporter::read(App &myApp, Graph &myGraph)
+void dataImporter::read(App &myApp)
 {
     // figure out what categories to reading in
     string name, address, category, s_rating, id, temp, s_longitude, s_latitude;
