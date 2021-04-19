@@ -38,7 +38,7 @@ void minHeap::insert(heapRestaurant item)
     theHeap = heapifyDown(0);
 }
 
-restaurant *minHeap::extractMax()
+restaurant *minHeap::extractMin()
 {
     heapRestaurant rootVal = theHeap[0];
     theHeap[0] = theHeap[--theHeapSize];
@@ -83,7 +83,7 @@ queue<restaurant *> minHeap::bfs(restaurant *src)
     std::queue<restaurant *> relatedRestaurants;
     while (theHeapSize > 0)
     {
-        relatedRestaurants.push(extractMax());
+        relatedRestaurants.push(extractMin());
     }
 
     return relatedRestaurants;

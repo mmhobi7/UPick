@@ -62,10 +62,10 @@ int main()
 
         // generate heap and graph from this restaurant
         graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
-        //minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
 
-        queue<restaurant *> relatedGraph = graph.bfs(chosen);
-        //queue<restaurant *> relatedGraph = heap.bfs(chosen);
+        // queue<restaurant *> relatedGraph = graph.bfs(chosen);
+        queue<restaurant *> relatedGraph = heap.bfs(chosen);
         relatedGraph.pop();
 
         int counter = 1;

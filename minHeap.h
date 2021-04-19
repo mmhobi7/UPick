@@ -10,7 +10,7 @@ public:
     void heapPrint();
     int getSize();
     void insert(heapRestaurant);
-    restaurant *extractMax();
+    restaurant *extractMin();
     long long distance(restaurant *, restaurant *);
     queue<restaurant *> bfs(restaurant *src);
 
