@@ -67,7 +67,9 @@ void app::addRestaurant(restaurant *obj)
 int app::findZip(int zip, string cat)
 {
     if (allRestaurants[cat].find(zip) != allRestaurants[cat].end())
+    {
         return zip;
+    }
     else
     {
         int minZip = INT_MAX;
