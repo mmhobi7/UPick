@@ -19,24 +19,9 @@ int main()
     {
         std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
         int i = 1;
-        uPick.reverse(uPick.maxer1);
-        // for (auto const &x : uPick.getList())
-        // {
-        //     std::cout << i++ << ": " << x.first << endl;
-        // }
-        int temp = 0;
-        for (auto i = uPick.maxer2.end(); i != uPick.maxer2.begin(); i--)
+        for (auto const &x : uPick.getList())
         {
-            i--;
-            if (temp < 10)
-            {
-                cout << i->first << " | " << endl;
-                for (auto j = i->second.begin(); j != i->second.end(); j++)
-                {
-                    cout << *j << endl;
-                    temp++;
-                }
-            }
+            std::cout << i++ << ": " << x.first << endl;
         }
         std::cout << i++ << ": Random" << endl
                   << endl;
@@ -75,14 +60,12 @@ int main()
         std::cout << "\nDo you want to use a Graph or a Min Heap?\n1. Graph\n2. Min Heap\n";
         int selector;
         std::cin >> selector;
-        queue<restaurant *> relatedGraph;
-        if (selector == 1)
-        {
+        queue<restaurant*> relatedGraph;
+        if (selector == 1) {
             graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
             relatedGraph = graph.bfs(chosen);
         }
-        else
-        {
+        else {
             minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
             relatedGraph = heap.bfs(chosen);
         }
@@ -90,6 +73,9 @@ int main()
         std::cout << endl
                   << "Would you like to see related restaurants? (Y/N)\n";
         bool moreRestaurants = true;
+
+        
+        
 
         int counter = 1;
         while (moreRestaurants)

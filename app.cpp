@@ -168,10 +168,3 @@ minHeap app::getLocalHeap(string cat, int zipcode, restaurant *source)
     }
     return myHeap;
 }
-
-
-void app::reverse(map<string, int>){
-    for(auto i = maxer1.begin(); i!=maxer1.end(); i++){
-        maxer2[i->second].push_back(i->first);
-    }
-}
