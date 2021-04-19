@@ -9,15 +9,15 @@ restaurant::restaurant()
     coords.first = 0;
     coords.second = 0;
 }
-restaurant::restaurant(string _name, double _rating, string addy, string cat, int zip, double longi, double lat)
+restaurant::restaurant(string _name, double _rating, string addy, string cat, int zip, double longitude, double latitude)
 {
     name = _name;
     rating = _rating;
     address = addy;
     category = cat;
     zipcode = zip;
-    coords.first = longi;
-    coords.second = lat;
+    coords.first = longitude;
+    coords.second = latitude;
 }
 
 string restaurant::getName()
