@@ -119,6 +119,6 @@ int main()
         if (choice == 'N' || choice == 'n')
             userContinue = false;
     }
-    std::cout << "Enjoy your meal! Thank you for using YouPick.\n";
+    std::cout << "Enjoy your meal! Thank you for using YouPick.\n\n";
     return 0;
 }
