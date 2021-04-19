@@ -36,7 +36,7 @@ int main()
         // if all, generate random cuisine
         int size = 0;
         if (option == 16)
-            option = rand() % 16 + 1;
+            option = (rand() % 15) + 1;
         if (choice == 'Y' || choice == 'y')
         {
             cout << endl
