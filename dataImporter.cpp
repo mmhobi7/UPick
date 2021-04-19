@@ -88,6 +88,7 @@ void dataImporter::read(app &myApp)
                     if (isValidZipcode(zipcode))
                     {
                         myApp.addRestaurant(new restaurant(name, rating, address, s, stoi(zipcode), longitude, latitude));
+                        myApp.maxer1[s]++;
                     }
                     break;
                 // }

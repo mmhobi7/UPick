@@ -11,6 +11,8 @@ class app
 
 public:
     app();
+    map<string, int> maxer1;
+    map<int, vector<string>> maxer2;
     void setCategorySet();
     set<string> getCategorySet();
     string findCategory(string s);
@@ -24,4 +26,5 @@ public:
     unordered_map<string, std::map<int, vector<restaurant *>>> getList();
     graph getLocalGraph(string cat, int zipcode, restaurant *source);
     minHeap getLocalHeap(string cat, int zipcode, restaurant *source);
+    void reverse(map<string, int>);
 };
