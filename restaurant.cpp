@@ -15,7 +15,7 @@ restaurant::restaurant(string _name, double _rating, string addy, string cat, in
     rating = _rating;
     address = addy;
     category = cat;
-    zipCode = zip;
+    zipcode = zip;
     coords.first = longi;
     coords.second = lat;
 }
@@ -47,7 +47,7 @@ void restaurant::setCategory(string cat)
 
 int restaurant::getZipcode()
 {
-    return zipCode;
+    return zipcode;
 }
 
 std::pair<long long, long long> restaurant::getCoords()

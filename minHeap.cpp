@@ -1,4 +1,4 @@
-#include "maxHeap.h"
+#include "minHeap.h"
 #include "restaurant.h"
 
 // credits Shane Malone Stepik 6.1.1
@@ -7,38 +7,38 @@
 #include <queue>
 #include <math.h>
 
-maxHeap::maxHeap(int size)
+minHeap::minHeap(int size)
 {
     theHeapSize = 0;
     max = size;
     theHeap = new heapRestaurant[size];
 }
 
-maxHeap::~maxHeap()
+minHeap::~minHeap()
 {
     delete theHeap;
     theHeapSize = 0;
 }
 
-void maxHeap::heapPrint()
+void minHeap::heapPrint()
 {
     for (int i = 0; i < theHeapSize; ++i)
         std::cout << theHeap[i].item->getName() << " ";
 }
 
-int maxHeap::getSize()
+int minHeap::getSize()
 {
     return theHeapSize;
 }
 
-void maxHeap::insert(heapRestaurant item)
+void minHeap::insert(heapRestaurant item)
 {
     theHeap[theHeapSize] = item;
     theHeapSize++;
     theHeap = heapifyDown(0);
 }
 
-restaurant *maxHeap::extractMax()
+restaurant *minHeap::extractMax()
 {
     heapRestaurant rootVal = theHeap[0];
     theHeap[0] = theHeap[--theHeapSize];
@@ -46,7 +46,7 @@ restaurant *maxHeap::extractMax()
     return rootVal.item;
 }
 
-heapRestaurant *maxHeap::heapifyDown(int index)
+heapRestaurant *minHeap::heapifyDown(int index)
 {
     int childLeft = 2 * index + 1;
     int childRight = 2 * index + 2;
@@ -69,7 +69,7 @@ heapRestaurant *maxHeap::heapifyDown(int index)
         return theHeap;
 }
 
-long long maxHeap::distance(restaurant *a, restaurant *b)
+long long minHeap::distance(restaurant *a, restaurant *b)
 {
     pair<long long, long long> a_coord;
     pair<long long, long long> b_coord;
@@ -77,9 +77,9 @@ long long maxHeap::distance(restaurant *a, restaurant *b)
     return sqrt(abs(pow(b_coord.first - a_coord.first, 2)) + abs(pow(b_coord.second - a_coord.second, 2)));
 }
 
-queue<restaurant *> maxHeap::bfs(restaurant *src)
+queue<restaurant *> minHeap::bfs(restaurant *src)
 {
-    // return top 100 restaurants from bfs
+    // return top 5 restaurants from heap
     std::queue<restaurant *> relatedRestaurants;
     cout << extractMax()->getName() << endl;
     relatedRestaurants.push(extractMax());

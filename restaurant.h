@@ -10,7 +10,7 @@ class restaurant
     string name;
     string address;
     string category;
-    int zipCode;
+    int zipcode;
     std::pair<long long, long long> coords;
 
 public:

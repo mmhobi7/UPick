@@ -2,11 +2,11 @@
 #include "heapRestaurant.h"
 // credits Muhamed Hobi Stepik 6.1.1
 
-class maxHeap
+class minHeap
 {
 public:
-    maxHeap(int);
-    ~maxHeap();
+    minHeap(int);
+    ~minHeap();
     void heapPrint();
     int getSize();
     void insert(heapRestaurant);
@@ -15,7 +15,7 @@ public:
     queue<restaurant *> bfs(restaurant *src);
 
 private:
-    maxHeap();
+    minHeap();
     heapRestaurant *heapifyDown(int);
     heapRestaurant *theHeap;
     int theHeapSize;

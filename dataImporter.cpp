@@ -37,14 +37,12 @@ bool dataImporter::isValidZipcode(string zipcode)
 void dataImporter::read(app &myApp)
 {
     // figure out what categories to reading in
-    string name, address, category, s_rating, id, temp, s_longitude, s_latitude;
+    string name, address, category, sRating, id, temp, sLongitude, sLatitude;
     double rating;
     long long longitude, latitude;
-    string zipCode;
+    string zipcode;
     string line;
     bool is_restaurant = false;
-    int count = 0;
-    int numRestaurants = 0;
 
     getline(fileStream, temp); // parse through column names (dont need)
     while (!fileStream.eof())
@@ -60,16 +58,16 @@ void dataImporter::read(app &myApp)
         address += ", " + temp;
         getline(fileStream, temp, ','); // postal code (dont need)
         address += ", " + temp;
-        zipCode = temp;
-        getline(fileStream, s_latitude, ',');
-        getline(fileStream, s_longitude, ',');
-        getline(fileStream, s_rating, ','); // num stars
-        getline(fileStream, temp, ',');     // num reviews (dont need)
-        getline(fileStream, temp, ',');     // is open (dont need)
-        getline(fileStream, line);          // list of categories
-        latitude = stoll(s_latitude);
-        longitude = stoll(s_longitude);
-        rating = stod(s_rating);
+        zipcode = temp;
+        getline(fileStream, sLatitude, ',');
+        getline(fileStream, sLongitude, ',');
+        getline(fileStream, sRating, ','); // num stars
+        getline(fileStream, temp, ',');    // num reviews (dont need)
+        getline(fileStream, temp, ',');    // is open (dont need)
+        getline(fileStream, line);         // list of categories
+        latitude = stoll(sLatitude);
+        longitude = stoll(sLongitude);
+        rating = stod(sRating);
         // parse thru name to see if it is a restaurant
         istringstream iss1(name);
         string s;
@@ -87,23 +85,14 @@ void dataImporter::read(app &myApp)
                 if (category != "")
                 {
                     is_restaurant = true;
-                    if (isValidZipcode(zipCode))
+                    if (isValidZipcode(zipcode))
                     {
-                        cout << name << " " << count++ << " zipcode: " << zipCode << endl;
-                        myApp.addRestaurant(new restaurant(name, rating, address, category, stoi(zipCode), longitude, latitude));
-                        numRestaurants++;
-                    }
-                    else
-                    {
-                        cout << name << " " << count++ << " zipcosde: " << zipCode << endl;
+                        myApp.addRestaurant(new restaurant(name, rating, address, category, stoi(zipcode), longitude, latitude));
                     }
                     break;
                 }
             }
         }
-        /*if(!is_restaurant)
-           category = "other";*/
         is_restaurant = false;
     }
-    cout << "num: " << numRestaurants << endl;
 }

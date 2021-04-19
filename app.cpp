@@ -60,10 +60,8 @@ string app::findCategory(string s)
 
 void app::addRestaurant(restaurant *obj)
 {
-    // cout << "Eahttt tjtjt: " << obj->getCategory() << endl;
     allRestaurants[obj->getCategory()][obj->getZipcode()].push_back(obj);
     allRestaurants["All"][obj->getZipcode()].push_back(obj);
-    //zipcodes.push_back(obj->getZipcode());
 }
 
 int app::findZip(int zip, string cat)
@@ -75,10 +73,8 @@ int app::findZip(int zip, string cat)
         int minZip = INT_MAX;
         for (auto iter = allRestaurants[cat].begin(); iter != allRestaurants[cat].end(); ++iter)
         {
-            //cout << abs(iter->first - zip) << endl;
             if (abs(iter->first - zip) < minZip)
             {
-                //cout << iter->first << endl;
                 minZip = iter->first;
             }
         }
@@ -122,7 +118,6 @@ graph app::getLocalGraph(string cat, int zipcode, restaurant *source)
     graph myGraph;
     int k = 0;
     int end = distance(allRestaurants[cat].find(zipcode), allRestaurants[cat].end());
-    // std::map<string, int>::iterator it = myMap.find("myKey");
     while (myGraph.getSize() < 26)
     {
         vector<restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];
@@ -134,12 +129,10 @@ graph app::getLocalGraph(string cat, int zipcode, restaurant *source)
                     myGraph.insertEdge(restInZip[i], restInZip[j], distance(restInZip[i], restInZip[j]));
             }
         }
-        // (next(uPick.getList().begin(), option - 1))->first
-
         k++;
         if (k > end - 2)
         {
-            cout << "BREAK"<< endl;
+            cout << "BREAK" << endl;
             break;
         }
         restaurant *newZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first][0];
@@ -150,12 +143,11 @@ graph app::getLocalGraph(string cat, int zipcode, restaurant *source)
     return myGraph;
 }
 
-maxHeap app::getLocalHeap(string cat, int zipcode, restaurant *source)
+minHeap app::getLocalHeap(string cat, int zipcode, restaurant *source)
 {
-    maxHeap myHeap(26);
+    minHeap myHeap(26);
     int k = 0;
     int end = distance(allRestaurants[cat].find(zipcode), allRestaurants[cat].end());
-    // std::map<string, int>::iterator it = myMap.find("myKey");
     while (myHeap.getSize() < 26)
     {
         vector<restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];

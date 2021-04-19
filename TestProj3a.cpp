@@ -7,7 +7,6 @@ int main()
 {
     srand(time(NULL)); // set random's seed
     app uPick;
-    // read in all data
     bool keepPicking = true;
     std::cout << "Welcome to YouPick!" << endl
               << endl;
@@ -15,7 +14,7 @@ int main()
               << endl;
 
     dataImporter importer("yelp_business.csv");
-    importer.read(uPick);
+    importer.read(uPick); // read in all data
     while (keepPicking)
     {
         std::cout << "Choose a Preferred Cuisine Style [if any]: \n";
@@ -53,7 +52,7 @@ int main()
         size = uPick.getZipcodeSize(option, zipcode);
         int randRest = rand() % size;
         chosen = uPick.getRestaurant(option, zipcode, randRest);
-        // generate heap and graph from this restaurant
+
         std::cout << "\nPicking a restaurant now...\n\n";
         std::cout << "Mmm! " << next(uPick.getList().begin(), option - 1)->first << "! We picked ";
         chosen->print();
@@ -61,8 +60,9 @@ int main()
                   << "Would you like to see related restaurants? (Y/N)\n";
         bool moreRestaurants = true;
 
+        // generate heap and graph from this restaurant
         graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
-        maxHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
 
         queue<restaurant *> relatedGraph = graph.bfs(chosen);
         relatedGraph.pop();
@@ -80,7 +80,7 @@ int main()
             {
                 if (counter == 1)
                     cout << "Here are some more " << next(uPick.getList().begin(), option - 1)->first << " restaurants near you.\n\n";
-                //print out 5 more choices while maxHeap is not empty
+                //print out 5 more choices while minHeap is not empty
                 if (relatedGraph.size() > 5)
                 {
                     size = 5;

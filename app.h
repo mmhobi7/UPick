@@ -1,14 +1,12 @@
 #pragma once
 #include "restaurant.h"
 #include "graph.h"
-#include "maxHeap.h"
+#include "minHeap.h"
 #include <map>
 
 class app
 {
     unordered_map<string, std::map<int, vector<restaurant *>>> allRestaurants; // category, map<zipcode, vecotr<restaurants>>
-    //unordered_map<string, priority_queue<Restaurant>> RelatedRestaurants; // uh idk what this is for
-    // vector<string> categoryList;
     set<string> categorySet;
 
 public:
@@ -26,6 +24,5 @@ public:
     int getListZipcodeSize(string);
     unordered_map<string, std::map<int, vector<restaurant *>>> getList();
     graph getLocalGraph(string cat, int zipcode, restaurant *source);
-    maxHeap getLocalHeap(string cat, int zipcode, restaurant *source);
-    // maxHeap& getLocalHeap(string cat, int zipcode, Restaurant* source);
+    minHeap getLocalHeap(string cat, int zipcode, restaurant *source);
 };
