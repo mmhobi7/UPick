@@ -71,20 +71,20 @@ heapRestaurant *minHeap::heapifyDown(int index)
 
 long long minHeap::distance(restaurant *a, restaurant *b)
 {
-    pair<long long, long long> a_coord;
-    pair<long long, long long> b_coord;
+    pair<long long, long long> aCoord;
+    pair<long long, long long> bCoord;
 
-    return sqrt(abs(pow(b_coord.first - a_coord.first, 2)) + abs(pow(b_coord.second - a_coord.second, 2)));
+    return sqrt(abs(pow(bCoord.first - aCoord.first, 2)) + abs(pow(bCoord.second - aCoord.second, 2)));
 }
 
 queue<restaurant *> minHeap::bfs(restaurant *src)
 {
     // return top 5 restaurants from heap
     std::queue<restaurant *> relatedRestaurants;
-    relatedRestaurants.push(extractMax());
-    relatedRestaurants.push(extractMax());
-    relatedRestaurants.push(extractMax());
-    relatedRestaurants.push(extractMax());
-    relatedRestaurants.push(extractMax());
+    while (theHeapSize > 0)
+    {
+        relatedRestaurants.push(extractMax());
+    }
+
     return relatedRestaurants;
 }
