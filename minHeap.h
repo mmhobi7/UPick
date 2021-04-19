@@ -11,12 +11,12 @@ public:
     int getSize();
     void insert(heapRestaurant);
     restaurant *extractMin();
-    long long distance(restaurant *, restaurant *);
+    double distance(restaurant *, restaurant *);
     queue<restaurant *> bfs(restaurant *src);
 
 private:
     minHeap();
-    heapRestaurant *heapifyDown(int);
+    heapRestaurant *heapifyUp(int);
     heapRestaurant *theHeap;
     int theHeapSize;
     int max;

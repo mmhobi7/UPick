@@ -35,44 +35,44 @@ void minHeap::insert(heapRestaurant item)
 {
     theHeap[theHeapSize] = item;
     theHeapSize++;
-    theHeap = heapifyDown(0);
+    theHeap = heapifyUp(0);
 }
 
 restaurant *minHeap::extractMin()
 {
     heapRestaurant rootVal = theHeap[0];
     theHeap[0] = theHeap[--theHeapSize];
-    theHeap = heapifyDown(0);
+    theHeap = heapifyUp(0);
     return rootVal.item;
 }
 
-heapRestaurant *minHeap::heapifyDown(int index)
+heapRestaurant *minHeap::heapifyUp(int index)
 {
     int childLeft = 2 * index + 1;
     int childRight = 2 * index + 2;
     if (childLeft > theHeapSize - 1)
         return theHeap;
-    int childMax = 0;
-    if (theHeap[childLeft].distance > theHeap[childRight].distance)
-        childMax = childLeft;
+    int childMin = 0;
+    if (theHeap[childLeft].distance < theHeap[childRight].distance)
+        childMin = childLeft;
     else
-        childMax = childRight;
-    if (theHeap[childMax].distance > theHeap[index].distance)
+        childMin = childRight;
+    if (theHeap[childMin].distance < theHeap[index].distance)
     {
         heapRestaurant tempVal = theHeap[index];
-        int nextIndex = childMax;
-        theHeap[index] = theHeap[childMax];
-        theHeap[childMax] = tempVal;
-        return heapifyDown(childMax);
+        int nextIndex = childMin;
+        theHeap[index] = theHeap[childMin];
+        theHeap[childMin] = tempVal;
+        return heapifyUp(childMin);
     }
     else
         return theHeap;
 }
 
-long long minHeap::distance(restaurant *a, restaurant *b)
+double minHeap::distance(restaurant *a, restaurant *b)
 {
-    pair<long long, long long> aCoord;
-    pair<long long, long long> bCoord;
+    pair<double, double> aCoord = a->getCoords();
+    pair<double, double> bCoord = b->getCoords();
 
     return sqrt(abs(pow(bCoord.first - aCoord.first, 2)) + abs(pow(bCoord.second - aCoord.second, 2)));
 }

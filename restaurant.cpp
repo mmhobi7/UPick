@@ -9,7 +9,7 @@ restaurant::restaurant()
     coords.first = 0;
     coords.second = 0;
 }
-restaurant::restaurant(string _name, double _rating, string addy, string cat, int zip, long long longi, long long lat)
+restaurant::restaurant(string _name, double _rating, string addy, string cat, int zip, double longi, double lat)
 {
     name = _name;
     rating = _rating;
@@ -50,7 +50,7 @@ int restaurant::getZipcode()
     return zipcode;
 }
 
-std::pair<long long, long long> restaurant::getCoords()
+std::pair<double, double> restaurant::getCoords()
 {
     return coords;
 }

@@ -11,11 +11,11 @@ class restaurant
     string address;
     string category;
     int zipcode;
-    std::pair<long long, long long> coords;
+    std::pair<double, double> coords;
 
 public:
     restaurant();
-    restaurant(string _name, double _rating, string addy, string cat, int zip, long long longi, long long lat);
+    restaurant(string _name, double _rating, string addy, string cat, int zip, double longi, double lat);
     double rating;
     string getName();
     double getRating();
@@ -24,5 +24,5 @@ public:
     int getZipcode();
     void print();
     void setCategory(string cat);
-    std::pair<long long, long long> getCoords();
+    std::pair<double, double> getCoords();
 };

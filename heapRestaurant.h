@@ -6,8 +6,8 @@ using namespace std;
 class heapRestaurant
 {
 public:
-    heapRestaurant(restaurant *, long long);
+    heapRestaurant(restaurant *, double);
     heapRestaurant();
     restaurant *item;
-    long long distance;
+    double distance;
 };

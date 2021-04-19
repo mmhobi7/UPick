@@ -39,7 +39,7 @@ void dataImporter::read(app &myApp)
     // figure out what categories to reading in
     string name, address, category, sRating, id, temp, sLongitude, sLatitude;
     double rating;
-    long long longitude, latitude;
+    double longitude, latitude;
     string zipcode;
     string line;
     bool is_restaurant = false;
@@ -65,8 +65,8 @@ void dataImporter::read(app &myApp)
         getline(fileStream, temp, ',');    // num reviews (dont need)
         getline(fileStream, temp, ',');    // is open (dont need)
         getline(fileStream, line);         // list of categories
-        latitude = stoll(sLatitude);
-        longitude = stoll(sLongitude);
+        latitude = stod(sLatitude);
+        longitude = stod(sLongitude);
         rating = stod(sRating);
         // parse thru name to see if it is a restaurant
         istringstream iss1(name);
