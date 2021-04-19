@@ -56,17 +56,26 @@ int main()
         std::cout << "\nPicking a restaurant now...\n\n";
         std::cout << "Mmm! " << next(uPick.getList().begin(), option - 1)->first << "! We picked ";
         chosen->print();
+        // generate heap and graph from this restaurant
+        std::cout << "\nDo you want to use a Graph or a Min Heap?\n1. Graph\n2. Min Heap\n";
+        int selector;
+        std::cin >> selector;
+        queue<restaurant*> relatedGraph;
+        if (selector == 1) {
+            graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+            relatedGraph = graph.bfs(chosen);
+        }
+        else {
+            minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+            relatedGraph = heap.bfs(chosen);
+        }
+        relatedGraph.pop();
         std::cout << endl
                   << "Would you like to see related restaurants? (Y/N)\n";
         bool moreRestaurants = true;
 
-        // generate heap and graph from this restaurant
-        graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
-        minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
-
-        // queue<restaurant *> relatedGraph = graph.bfs(chosen);
-        queue<restaurant *> relatedGraph = heap.bfs(chosen);
-        relatedGraph.pop();
+        
+        
 
         int counter = 1;
         while (moreRestaurants)
