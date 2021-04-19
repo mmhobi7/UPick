@@ -18,42 +18,42 @@
     <ClCompile Include="TestProj3a.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Restaurant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="our_unordered_map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dataImporter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graph.cpp">
+    <ClCompile Include="graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="maxHeap.cpp">
+    <ClCompile Include="heapRestaurant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minHeap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="restaurant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="our_unordered_map.h">
+    <ClInclude Include="minHeap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="restaurant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dataImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graph.h">
+    <ClInclude Include="graph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="maxHeap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Restaurant.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="App.h">
+    <ClInclude Include="heapRestaurant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

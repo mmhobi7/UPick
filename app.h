@@ -11,7 +11,6 @@ class app
 
 public:
     app();
-    void setCategoryList();
     void setCategorySet();
     set<string> getCategorySet();
     string findCategory(string s);
