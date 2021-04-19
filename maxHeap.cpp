@@ -1,5 +1,5 @@
 #include "maxHeap.h"
-#include "Restaurant.h"
+#include "restaurant.h"
 
 // credits Shane Malone Stepik 6.1.1
 
@@ -38,7 +38,7 @@ void maxHeap::insert(heapRestaurant item)
     theHeap = heapifyDown(0);
 }
 
-Restaurant *maxHeap::extractMax()
+restaurant *maxHeap::extractMax()
 {
     heapRestaurant rootVal = theHeap[0];
     theHeap[0] = theHeap[--theHeapSize];
@@ -69,7 +69,7 @@ heapRestaurant *maxHeap::heapifyDown(int index)
         return theHeap;
 }
 
-long long maxHeap::distance(Restaurant *a, Restaurant *b)
+long long maxHeap::distance(restaurant *a, restaurant *b)
 {
     pair<long long, long long> a_coord;
     pair<long long, long long> b_coord;
@@ -77,10 +77,10 @@ long long maxHeap::distance(Restaurant *a, Restaurant *b)
     return sqrt(abs(pow(b_coord.first - a_coord.first, 2)) + abs(pow(b_coord.second - a_coord.second, 2)));
 }
 
-queue<Restaurant *> maxHeap::bfs(Restaurant *src)
+queue<restaurant *> maxHeap::bfs(restaurant *src)
 {
     // return top 100 restaurants from bfs
-    std::queue<Restaurant *> relatedRestaurants;
+    std::queue<restaurant *> relatedRestaurants;
     cout << extractMax()->getName() << endl;
     relatedRestaurants.push(extractMax());
     relatedRestaurants.push(extractMax());

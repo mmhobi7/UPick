@@ -5,7 +5,7 @@
 #include <set>
 using namespace std;
 
-class Restaurant
+class restaurant
 {
     string name;
     string address;
@@ -14,8 +14,8 @@ class Restaurant
     std::pair<long long, long long> coords;
 
 public:
-    Restaurant();
-    Restaurant(string _name, double _rating, string addy, string cat, int zip, long long longi, long long lat);
+    restaurant();
+    restaurant(string _name, double _rating, string addy, string cat, int zip, long long longi, long long lat);
     double rating;
     string getName();
     double getRating();

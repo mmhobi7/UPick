@@ -1,6 +1,12 @@
-#include "Graph.h"
+#include "graph.h"
 #include <math.h>
-void Graph::insertEdge(Restaurant *from, Restaurant *to, int weight)
+
+graph::graph()
+{
+    index = 0;
+}
+
+void graph::insertEdge(restaurant *from, restaurant *to, int weight)
 {
     // add restaurant to mapper
     if (mapper.find(from) == mapper.end())
@@ -26,17 +32,17 @@ void Graph::insertEdge(Restaurant *from, Restaurant *to, int weight)
     }
 
     // add to main graph map
-    graph[mapper[from]].push_back(make_pair(mapper[to], weight));
-    graph[mapper[to]].push_back(make_pair(mapper[from], weight));
+    theGraph[mapper[from]].push_back(make_pair(mapper[to], weight));
+    theGraph[mapper[to]].push_back(make_pair(mapper[from], weight));
 }
 
-bool Graph::isEdge(Restaurant *from, Restaurant *to)
+bool graph::isEdge(restaurant *from, restaurant *to)
 {
     if (v.find(mapper[from]) == v.end() || v.find(mapper[to]) == v.end())
     {
         return false;
     }
-    vector<pair<int, int>> adj = graph[mapper[from]];
+    vector<pair<int, int>> adj = theGraph[mapper[from]];
     for (int i = 0; i < adj.size(); i++)
     {
         if (adj[i].first == mapper[to])
@@ -47,13 +53,13 @@ bool Graph::isEdge(Restaurant *from, Restaurant *to)
     return false;
 }
 
-int Graph::getWeight(Restaurant *from, Restaurant *to)
+int graph::getWeight(restaurant *from, restaurant *to)
 {
     if (v.find(mapper[from]) == v.end() || v.find(mapper[to]) == v.end())
     {
         return 0;
     }
-    vector<pair<int, int>> adj = graph[mapper[from]];
+    vector<pair<int, int>> adj = theGraph[mapper[from]];
     for (int i = 0; i < adj.size(); i++)
     {
         if (adj[i].first == mapper[to])
@@ -64,14 +70,14 @@ int Graph::getWeight(Restaurant *from, Restaurant *to)
     return 0;
 }
 
-vector<Restaurant *> Graph::getAdjacent(Restaurant *vertex)
+vector<restaurant *> graph::getAdjacent(restaurant *vertex)
 {
-    vector<Restaurant *> adj;
+    vector<restaurant *> adj;
     if (v.find(mapper[vertex]) == v.end())
     {
         return adj;
     }
-    vector<pair<int, int>> list = graph[mapper[vertex]];
+    vector<pair<int, int>> list = theGraph[mapper[vertex]];
 
     for (int i = 0; i < list.size(); i++)
     {
@@ -87,29 +93,34 @@ vector<Restaurant *> Graph::getAdjacent(Restaurant *vertex)
     return adj;
 }
 
-queue<Restaurant *> Graph::bfs(Restaurant* src) {
+queue<restaurant *> graph::bfs(restaurant *src)
+{
     // return top 100 restaurants from bfs
-    std::queue<Restaurant*> relatedRestaurants;
-    std::queue<Restaurant*> q;
+    std::queue<restaurant *> relatedRestaurants;
+    std::queue<restaurant *> q;
     int v = mapper.size();
-    bool* visited = new bool[v];
-    for(int i = 0; i < v; i++) {
+    bool *visited = new bool[v];
+    for (int i = 0; i < v; i++)
+    {
         visited[i] = false;
     }
 
     visited[mapper[src]] = true;
     q.push(src);
 
-    while(!q.empty() && relatedRestaurants.size() <= 100) {
+    while (!q.empty() && relatedRestaurants.size() <= 100)
+    {
         // pop top element,
-        Restaurant* curr = q.front();
+        restaurant *curr = q.front();
         relatedRestaurants.push(curr);
         q.pop();
 
         // add adj elements
-        vector<Restaurant*> adj = this->getAdjacent(curr);
-        for(auto i = adj.begin(); i != adj.end(); i++) {
-            if(!visited[mapper[*i]]) {
+        vector<restaurant *> adj = this->getAdjacent(curr);
+        for (auto i = adj.begin(); i != adj.end(); i++)
+        {
+            if (!visited[mapper[*i]])
+            {
                 visited[mapper[*i]] = true;
                 q.push(*i);
             }
@@ -118,17 +129,15 @@ queue<Restaurant *> Graph::bfs(Restaurant* src) {
     return relatedRestaurants;
 }
 
-long long Graph::distance(Restaurant *a, Restaurant *b) {
+long long graph::distance(restaurant *a, restaurant *b)
+{
     pair<long long, long long> a_coord;
     pair<long long, long long> b_coord;
 
     return sqrt(abs(pow(b_coord.first - a_coord.first, 2)) + abs(pow(b_coord.second - a_coord.second, 2)));
 }
 
-int Graph::getSize() {
+int graph::getSize()
+{
     return v.size();
-}
-
-Graph::Graph() {
-    index = 0;
 }

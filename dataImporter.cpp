@@ -1,6 +1,6 @@
 #include "dataImporter.h"
-
 #include <sstream> // std::stringstream
+
 using std::string;
 
 dataImporter::dataImporter(std::string file)
@@ -17,7 +17,24 @@ dataImporter::~dataImporter()
 {
     fileStream.close();
 }
-void dataImporter::read(App &myApp)
+
+bool dataImporter::isValidZipcode(string zipcode)
+{
+    for (auto i = zipcode.begin(); i != zipcode.end(); i++)
+    {
+        if (!isdigit(*i))
+        {
+            return false;
+        }
+    }
+    if (zipcode.length() <= 0)
+    {
+        return false;
+    }
+    return true;
+}
+
+void dataImporter::read(app &myApp)
 {
     // figure out what categories to reading in
     string name, address, category, s_rating, id, temp, s_longitude, s_latitude;
@@ -32,7 +49,7 @@ void dataImporter::read(App &myApp)
     getline(fileStream, temp); // parse through column names (dont need)
     while (!fileStream.eof())
     {
-        count++;
+        // count++;
         getline(fileStream, temp, ','); // row number (dont need)
         getline(fileStream, id, ',');
         getline(fileStream, name, ',');
@@ -70,9 +87,15 @@ void dataImporter::read(App &myApp)
                 if (category != "")
                 {
                     is_restaurant = true;
-                    if (zipCode.length() == 5)
+                    if (isValidZipcode(zipCode))
                     {
-                        myApp.addRestaurant(new Restaurant(name, rating, address, category, stoi(zipCode), longitude, latitude));
+                        cout << name << " " << count++ << " zipcode: " << zipCode << endl;
+                        myApp.addRestaurant(new restaurant(name, rating, address, category, stoi(zipCode), longitude, latitude));
+                        numRestaurants++;
+                    }
+                    else
+                    {
+                        cout << name << " " << count++ << " zipcosde: " << zipCode << endl;
                     }
                     break;
                 }
@@ -82,4 +105,5 @@ void dataImporter::read(App &myApp)
            category = "other";*/
         is_restaurant = false;
     }
+    cout << "num: " << numRestaurants << endl;
 }

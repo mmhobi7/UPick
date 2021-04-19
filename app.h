@@ -1,31 +1,31 @@
 #pragma once
-#include "Restaurant.h"
-#include "Graph.h"
+#include "restaurant.h"
+#include "graph.h"
 #include "maxHeap.h"
 #include <map>
 
-class App
+class app
 {
-    unordered_map<string, std::map<int, vector<Restaurant *>>> allRestaurants; // category, map<zipcode, vecotr<restaurants>>
+    unordered_map<string, std::map<int, vector<restaurant *>>> allRestaurants; // category, map<zipcode, vecotr<restaurants>>
     //unordered_map<string, priority_queue<Restaurant>> RelatedRestaurants; // uh idk what this is for
     // vector<string> categoryList;
     set<string> categorySet;
 
 public:
-    App();
+    app();
     void setCategoryList();
     void setCategorySet();
     set<string> getCategorySet();
     string findCategory(string s);
-    void addRestaurant(Restaurant *obj);
+    void addRestaurant(restaurant *obj);
     int findZip(int zip, string cat);
     int getCategorySize(int category);
     int getZipcodeSize(int category, int zipcode);
-    Restaurant *getRestaurant(int category, int zipcode, int index);
+    restaurant *getRestaurant(int category, int zipcode, int index);
     int getListSize();
     int getListZipcodeSize(string);
-    unordered_map<string, std::map<int, vector<Restaurant *>>> getList();
-    Graph getLocalGraph(string cat, int zipcode, Restaurant *source);
-    maxHeap getLocalHeap(string cat, int zipcode, Restaurant *source);
+    unordered_map<string, std::map<int, vector<restaurant *>>> getList();
+    graph getLocalGraph(string cat, int zipcode, restaurant *source);
+    maxHeap getLocalHeap(string cat, int zipcode, restaurant *source);
     // maxHeap& getLocalHeap(string cat, int zipcode, Restaurant* source);
 };

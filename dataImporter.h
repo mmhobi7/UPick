@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <fstream>
-#include "App.h"
-#include "Graph.h"
+#include "app.h"
+#include "graph.h"
 // credits Muhamed Hobi Stepik 6.1.1
 
 class dataImporter
@@ -10,7 +10,8 @@ class dataImporter
 public:
     dataImporter(std::string);
     ~dataImporter();
-    void read(App &myApp);
+    void read(app &myApp);
+    bool isValidZipcode(string);
 
 private:
     std::string fileName;

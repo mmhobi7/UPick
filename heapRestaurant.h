@@ -1,13 +1,13 @@
 #pragma once
-#include "Restaurant.h"
+#include "restaurant.h"
 
 using namespace std;
 
 class heapRestaurant
 {
 public:
-    heapRestaurant(Restaurant *, long long);
+    heapRestaurant(restaurant *, long long);
     heapRestaurant();
-    Restaurant *item;
+    restaurant *item;
     long long distance;
 };

@@ -2,11 +2,10 @@
 
 heapRestaurant::heapRestaurant()
 {
-
 }
 
-heapRestaurant::heapRestaurant(Restaurant* a, long long b)
+heapRestaurant::heapRestaurant(restaurant *a, long long b)
 {
-    item=a;
-    distance=b;
+    item = a;
+    distance = b;
 }

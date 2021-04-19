@@ -1,33 +1,14 @@
-#include "App.h"
+#include "app.h"
 #include <climits>
 #include <map>
 #include <iterator>
 
-App::App()
+app::app()
 {
-    // setCategoryList();
     setCategorySet();
 }
 
-// void App::setCategoryList()
-// {
-//     categoryList.push_back("American");
-//     categoryList.push_back("Asian Fusion");
-//     categoryList.push_back("Bars");
-//     categoryList.push_back("Breakfast");
-//     categoryList.push_back("Coffee & Tea");
-//     categoryList.push_back("Fast Food");
-//     categoryList.push_back("Halal");
-//     categoryList.push_back("Indian");
-//     categoryList.push_back("Latin");
-//     categoryList.push_back("Mediterranean");
-//     categoryList.push_back("Mexican");
-//     categoryList.push_back("Pizza");
-//     categoryList.push_back("Seafood");
-//     categoryList.push_back("Vegan");
-// }
-
-void App::setCategorySet()
+void app::setCategorySet()
 {
     categorySet.insert("American");
     categorySet.insert("Asian");
@@ -43,14 +24,15 @@ void App::setCategorySet()
     categorySet.insert("Pizza");
     categorySet.insert("Seafood");
     categorySet.insert("Vegan");
+    categorySet.insert("All");
 }
 
-set<string> App::getCategorySet()
+set<string> app::getCategorySet()
 {
     return categorySet;
 }
 
-string App::findCategory(string s)
+string app::findCategory(string s)
 {
     if (categorySet.find(s) != categorySet.end())
     {
@@ -76,14 +58,15 @@ string App::findCategory(string s)
         return "";
 }
 
-void App::addRestaurant(Restaurant *obj)
+void app::addRestaurant(restaurant *obj)
 {
     // cout << "Eahttt tjtjt: " << obj->getCategory() << endl;
     allRestaurants[obj->getCategory()][obj->getZipcode()].push_back(obj);
+    allRestaurants["All"][obj->getZipcode()].push_back(obj);
     //zipcodes.push_back(obj->getZipcode());
 }
 
-int App::findZip(int zip, string cat)
+int app::findZip(int zip, string cat)
 {
     if (allRestaurants[cat].find(zip) != allRestaurants[cat].end())
         return zip;
@@ -103,46 +86,46 @@ int App::findZip(int zip, string cat)
     }
 }
 
-int App::getCategorySize(int category)
+int app::getCategorySize(int category)
 {
     return allRestaurants[(next(allRestaurants.begin(), category))->first].size();
 }
 
-int App::getListSize()
+int app::getListSize()
 {
     return allRestaurants.size();
 }
 
-int App::getListZipcodeSize(string key)
+int app::getListZipcodeSize(string key)
 {
     return allRestaurants[key].size();
 }
 
-int App::getZipcodeSize(int category, int zipcode)
+int app::getZipcodeSize(int category, int zipcode)
 {
     zipcode = findZip(zipcode, (next(allRestaurants.begin(), category - 1))->first);
     return allRestaurants[(next(allRestaurants.begin(), category - 1))->first][zipcode].size();
 }
 
-Restaurant *App::getRestaurant(int category, int zipcode, int index)
+restaurant *app::getRestaurant(int category, int zipcode, int index)
 {
     return allRestaurants[(next(allRestaurants.begin(), category - 1))->first][zipcode][index];
 }
 
-unordered_map<string, std::map<int, vector<Restaurant *>>> App::getList()
+unordered_map<string, std::map<int, vector<restaurant *>>> app::getList()
 {
     return allRestaurants;
 }
 
-Graph App::getLocalGraph(string cat, int zipcode, Restaurant *source)
+graph app::getLocalGraph(string cat, int zipcode, restaurant *source)
 {
-    Graph myGraph;
+    graph myGraph;
     int k = 0;
     int end = distance(allRestaurants[cat].find(zipcode), allRestaurants[cat].end());
     // std::map<string, int>::iterator it = myMap.find("myKey");
     while (myGraph.getSize() < 26)
     {
-        vector<Restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];
+        vector<restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];
         for (int i = 0; i < restInZip.size(); i++)
         {
             for (int j = 1; j < restInZip.size(); j++)
@@ -154,19 +137,20 @@ Graph App::getLocalGraph(string cat, int zipcode, Restaurant *source)
         // (next(uPick.getList().begin(), option - 1))->first
 
         k++;
-        if (k == end - 1)
+        if (k > end - 2)
         {
+            cout << "BREAK"<< endl;
             break;
         }
-        Restaurant *newZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first][0];
-        Restaurant *oldZip = restInZip[restInZip.size() - 1];
+        restaurant *newZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first][0];
+        restaurant *oldZip = restInZip[restInZip.size() - 1];
 
         myGraph.insertEdge(newZip, oldZip, myGraph.distance(newZip, oldZip));
     }
     return myGraph;
 }
 
-maxHeap App::getLocalHeap(string cat, int zipcode, Restaurant *source)
+maxHeap app::getLocalHeap(string cat, int zipcode, restaurant *source)
 {
     maxHeap myHeap(26);
     int k = 0;
@@ -174,7 +158,7 @@ maxHeap App::getLocalHeap(string cat, int zipcode, Restaurant *source)
     // std::map<string, int>::iterator it = myMap.find("myKey");
     while (myHeap.getSize() < 26)
     {
-        vector<Restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];
+        vector<restaurant *> restInZip = allRestaurants[cat][next(allRestaurants[cat].begin(), distance(allRestaurants[cat].begin(), allRestaurants[cat].find(zipcode)) + k)->first];
         for (int i = 0; i < restInZip.size(); i++)
         {
             if (myHeap.getSize() < 26)
