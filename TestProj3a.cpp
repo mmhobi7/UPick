@@ -119,6 +119,6 @@ int main()
         if (choice == 'N' || choice == 'n')
             keepPicking = false;
     }
-    std::cout << "\nEnjoy your meal! Thank you for using YouPick.\n";
+    std::cout << "Enjoy your meal! Thank you for using YouPick.\n";
     return 0;
 }
