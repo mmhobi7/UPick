@@ -11,7 +11,7 @@ int main()
     bool keepPicking = true;
     std::cout << "Welcome to YouPick!" << endl
               << endl;
-    std::cout << "Please wait..." << endl;
+    std::cout << "Please wait..." << endl << endl;
 
     dataImporter importer("yelp_business.csv");
     Graph graph;
@@ -24,11 +24,11 @@ int main()
         {
             std::cout << i++ << ": " << x.first << endl;
         }
-        std::cout << i++ << ": All" << endl; 
+        std::cout << i++ << ": All" << endl << endl; 
         int option = 0;
         cin >> option;
         char choice;
-        std::cout << "Do you wish to enter a zipcode? (Y/N)" << endl;
+        std::cout << endl << "Do you wish to enter a ZIP code? (Y/N)" << endl;
         cin >> choice;
         int zipcode = 0;
         Restaurant *chosen;
@@ -38,7 +38,7 @@ int main()
             option = rand() % 15 + 1;
         if (choice == 'Y' || choice == 'y')
         {
-            cout << "Enter Zipcode: " << endl;
+            cout << endl << "Enter ZIP code: " << endl;
             cin >> zipcode;
             zipcode = uPick.findZip(zipcode, (next(uPick.getList().begin(), option - 1))->first);
         }
@@ -52,20 +52,24 @@ int main()
         chosen = uPick.getRestaurant(option, zipcode, randRest);
         // generate heap and graph from this restaurant
         std::cout << "\nPicking a restaurant now...\n\n";
-        std::cout << "We picked: ";
+        std::cout << "Mmm! "<< next(uPick.getList().begin(), option - 1)->first << "! We picked ";
         chosen->print();
-        std::cout << "Would you like to see related restaurants? (Y/N)\n\n";
+        std::cout << endl << "Would you like to see related restaurants? (Y/N)\n";
         bool moreRestaurants = true;
 
         graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
 
         queue<Restaurant*> related = graph.bfs(chosen);
         related.pop();
+        int counter = 1;
         while (moreRestaurants)
         {
             cin >> choice;
+            cout << endl;
             if (choice == 'Y' || choice == 'y')
             {
+                if (counter == 1)
+                    cout << "Here are some more " << next(uPick.getList().begin(), option - 1)->first << " restaurants near you.\n\n";
                 //print out 5 more choices while maxHeap is not empty
                 if(related.size() > 5) {
                         size = 5;
@@ -73,24 +77,25 @@ int main()
                         size = related.size();
                     }
                     for(int i = 0; i < size; i++) {
-                        cout << i + 1 << ": ";
+                        cout << counter++ << ": ";
                         related.front()->print();
+                        cout << endl;
                         related.pop();
                     }
                     if (related.empty()) {
                         std::cout << endl << "No more related restaurants!" << endl << endl;
                         break;
                     }
-                    std::cout << "Would you like to see more?" << endl;
+                    std::cout << "Would you like to see more? (Y/N)" << endl;
                     }
             else
                 moreRestaurants = false;
         }
-        std::cout << "Would you like to pick again? (Y/N)" << endl;
+        std::cout << "Would you like to pick another restaurant? (Y/N)" << endl;
         cin >> choice;
         if (choice == 'N' || choice == 'n')
             keepPicking = false;
     }
-    std::cout << "Okay! Enjoy your meal!\n";
+    std::cout << "Enjoy your meal! Thank you for using YouPick.\n";
     return 0;
 }

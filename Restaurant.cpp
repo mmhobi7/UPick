@@ -57,6 +57,6 @@ std::pair<long long, long long> Restaurant::getCoords()
 
 void Restaurant::print()
 {
-    cout << "\"" << getName() << "\" " << "(" << getCategory() << "). It has " << getRating() << " stars. "  << endl;
-    cout << getAddress() << endl;
+    cout << "\"" << getName() << "\"" << ". It has " << getRating() << " star(s). "  << endl;
+    cout << "Address: " << getAddress() << endl;
 }
