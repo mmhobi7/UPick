@@ -69,8 +69,6 @@ int main()
         queue<restaurant *> relatedHeap = heap.bfs(chosen);
         relatedHeap.pop();
 
-        queue<restaurant *> related = graph.bfs(chosen);
-        related.pop();
         int counter = 1;
         while (moreRestaurants)
         {
@@ -92,9 +90,9 @@ int main()
                 for (int i = 0; i < size; i++)
                 {
                     cout << counter++ << ": ";
-                    related.front()->print();
+                    relatedGraph.front()->print();
                     cout << endl;
-                    related.pop();
+                    relatedGraph.pop();
                 }
                 if (relatedGraph.empty())
                 {
