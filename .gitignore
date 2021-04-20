@@ -8,6 +8,10 @@
 main.out
 /.vscode
 TestProj3a
+TestProj3a.vcxproj
+TestProj3a.vcxproj.filters
+TestProj3a.vcxproj.user
+TestProj3a.vcxproj*
 
 # User-specific files
 *.rsuser
