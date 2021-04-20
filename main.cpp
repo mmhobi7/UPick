@@ -3,19 +3,37 @@
 #include <time.h>
 #include <iterator> // std::advance
 #include <chrono>
+#include <string.h>
 
-#ifdef UPICK_DEBUG
-#define PICK_DEBUG true
-#else
-#define PICK_DEBUG true
-#endif
+#define NAME "YouPick"
+#define VERSION "0.1.2"
 
-int main()
+void helpmenu()
 {
-    const bool debug = PICK_DEBUG;
+    fprintf(stderr, "%s v%s \n\n", NAME, VERSION);
+    fprintf(stderr, "Options:\n \
+    --debug : Enable debug messages\n \
+    --help  : Display this messages\n\n");
+}
+
+int main(int argc, char **argv)
+{
     srand(time(NULL)); // set random's seed
-    app uPick;
     bool userContinue = true;
+    bool debug = false;
+    if (argc > 1)
+    {
+        if (strcmp(argv[1], "--Debug") == 0 || strcmp(argv[1], "--debug") == 0)
+        {
+            debug = true;
+        }
+        else
+        {
+            helpmenu();
+            exit(0);
+        }
+    }
+    app uPick;
     std::cout << "Welcome to YouPick!" << endl
               << endl;
     std::cout << "Please wait..." << endl
