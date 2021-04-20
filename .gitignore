@@ -12,6 +12,11 @@ TestProj3a.vcxproj
 TestProj3a.vcxproj.filters
 TestProj3a.vcxproj.user
 TestProj3a.vcxproj*
+main
+main.vcxproj
+main.vcxproj.filters
+main.vcxproj.user
+main.vcxproj*
 
 # User-specific files
 *.rsuser
