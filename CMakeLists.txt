@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.17)
-project(YouPickProject)
+cmake_minimum_required(VERSION 3.16)
+project(UPick)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(YouPickProject main.cpp dataImporter.cpp dataImporter.h maxHeap.cpp maxHeap.h Restaurant.cpp Restaurant.h unordered_map.cpp unordered_map.h App.cpp App.h Graph.cpp Graph.h)
+add_executable(UPick main.cpp dataImporter.cpp dataImporter.h minHeap.cpp minHeap.h restaurant.cpp restaurant.h app.cpp app.h graph.cpp graph.h heapRestaurant.cpp heapRestaurant.h)

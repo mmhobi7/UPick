@@ -18,6 +18,8 @@ main.vcxproj.filters
 main.vcxproj.user
 main.vcxproj*
 
+[Bb]uild/
+
 # User-specific files
 *.rsuser
 *.suo
