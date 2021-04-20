@@ -2,9 +2,17 @@
 #include "dataImporter.h"
 #include <time.h>
 #include <iterator> // std::advance
+#include <chrono>
+
+#ifdef UPICK_DEBUG
+#define PICK_DEBUG true
+#else
+#define PICK_DEBUG true
+#endif
 
 int main()
 {
+    const bool debug = PICK_DEBUG;
     srand(time(NULL)); // set random's seed
     app uPick;
     bool userContinue = true;
@@ -60,22 +68,54 @@ int main()
         std::cout << "\nDo you want to use a Graph or a Min Heap?\n1. Graph\n2. Min Heap\n";
         int selector;
         std::cin >> selector;
-        queue<restaurant*> relatedGraph;
-        if (selector == 1) {
-            graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
-            relatedGraph = graph.bfs(chosen);
+        queue<restaurant *> relatedGraph;
+
+        auto passZero = chrono::high_resolution_clock::now();
+        auto passOne = chrono::high_resolution_clock::now();
+        auto passTwo = chrono::high_resolution_clock::now();
+        float timeGraph, timeHeap, timeGraph2, timeHeap2;
+
+        passZero = chrono::high_resolution_clock::now();
+        graph graph = uPick.getLocalGraph((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        passOne = chrono::high_resolution_clock::now();
+        minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
+        passTwo = chrono::high_resolution_clock::now();
+
+        timeGraph = (chrono::duration_cast<chrono::nanoseconds>(passOne - passZero).count());
+        timeHeap = (chrono::duration_cast<chrono::nanoseconds>(passTwo - passOne).count());
+        if (debug)
+        {
+            cout << endl
+                 << "Time Graph: " << timeGraph << " nanoseconds. Time Heap: " << timeHeap << " nanoseconds." << endl;
         }
-        else {
-            minHeap heap = uPick.getLocalHeap((next(uPick.getList().begin(), option - 1))->first, zipcode, chosen);
-            relatedGraph = heap.bfs(chosen);
+        passZero = chrono::high_resolution_clock::now();
+        queue<restaurant *> graphQueue = graph.bfs(chosen);
+        passOne = chrono::high_resolution_clock::now();
+        queue<restaurant *> heapQueue = heap.bfs(chosen);
+        passTwo = chrono::high_resolution_clock::now();
+        if (debug)
+        {
+            timeGraph2 = (chrono::duration_cast<chrono::nanoseconds>(passOne - passZero).count());
+            timeHeap2 = (chrono::duration_cast<chrono::nanoseconds>(passTwo - passOne).count());
+
+            cout << "Time Graph bfs: " << timeGraph2 << " nanoseconds. Time Heap extract min: " << timeHeap2 << " nanoseconds." << endl;
+            cout << "Time Graph total: " << timeGraph + timeGraph2 << " nanoseconds. Time Heap total: " << timeHeap + timeHeap2 << " nanoseconds." << endl;
+            cout << "The Heap ran " << (timeGraph + timeGraph2) - (timeHeap + timeHeap2) << " nanoseconds faster," << endl;
+            cout << "Or " << (((timeGraph + timeGraph2) - (timeHeap + timeHeap2)) / (timeGraph + timeGraph2)) * 100.0 << "% faster than the Graph." << endl;
         }
+        if (selector == 1)
+        {
+            relatedGraph = graphQueue;
+        }
+        else
+        {
+            relatedGraph = heapQueue;
+        }
+
         relatedGraph.pop();
         std::cout << endl
                   << "Would you like to see related restaurants? (Y/N)\n";
         bool moreRestaurants = true;
-
-        
-        
 
         int counter = 1;
         while (moreRestaurants)
